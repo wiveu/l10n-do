@@ -543,7 +543,7 @@ class AccountMove(models.Model):
 
         if fiscal_invoice:
             action = self.env.ref(
-                'l10n_do_ncf.action_account_invoice_cancel'
+                'l10n_do_ncf.action_account_move_cancel'
             ).read()[0]
             action['context'] = {'default_invoice_id': fiscal_invoice.id}
             return action

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="account_invoice_cancel_view" model="ir.ui.view">
+    <record id="account_move_cancel_view" model="ir.ui.view">
         <field name="name">account.move.cancel.form</field>
         <field name="model">account.move.cancel</field>
         <field name="arch" type="xml">
-            <form string="Cancel Selected Invoice">
+            <form string="Cancel Selected Move">
                 <group>
                     <field name="annulation_type"/>
                 </group>
                 <footer>
-                    <button string="Cancel Invoice" name="invoice_cancel"
+                    <button string="Cancel Move" name="invoice_cancel"
                             type="object" default_focus="1" class="btn-primary"/>
                     <button string="Cancel" class="btn-default" special="cancel"/>
                 </footer>
@@ -17,11 +17,11 @@
         </field>
     </record>
 
-    <record id="action_account_invoice_cancel" model="ir.actions.act_window">
-        <field name="name">Cancel Selected Invoice</field>
+    <record id="action_account_move_cancel" model="ir.actions.act_window">
+        <field name="name">Cancel Selected Move</field>
         <field name="res_model">account.move.cancel</field>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="l10n_do_ncf.account_invoice_cancel_view"/>
+        <field name="view_id" ref="l10n_do_ncf.account_move_cancel_view"/>
         <field name="target">new</field>
     </record>
 

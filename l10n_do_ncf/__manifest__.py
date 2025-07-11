@@ -31,7 +31,7 @@
         "security/res_groups.xml",
 
         "wizard/account_fiscal_sequence_validate_wizard_views.xml",
-        "wizard/account_move_refund_views.xml",
+        "wizard/account_move_reversal_views.xml",
 
         # "views/account_report.xml",
         "views/account_move_views.xml",

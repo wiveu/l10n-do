@@ -352,7 +352,7 @@ msgstr "Todas las facturas de compra estarán sujetas al principio de proporcion
 
 #. module: l10n_do_dgii_reports
 #. odoo-python
-#: code:addons/l10n_do_dgii_reports/models/account_invoice.py:0
+#: code:addons/l10n_do_dgii_reports/models/account_move.py:0
 #, python-format
 msgid "An invoice cannot have multiple withholding taxes."
 msgstr "Una factura no puede tener múltiples retenciones."
@@ -597,7 +597,7 @@ msgstr "Código"
 
 #. module: l10n_do_dgii_reports
 #. odoo-python
-#: code:addons/l10n_do_dgii_reports/models/account_invoice.py:0
+#: code:addons/l10n_do_dgii_reports/models/account_move.py:0
 #: model:ir.model.constraint,message:l10n_do_dgii_reports.constraint_invoice_service_type_detail_code_unique
 #, python-format
 msgid "Code must be unique"
@@ -3031,7 +3031,7 @@ msgstr "Puedes crear tus declaraciones de la DGII aquí."
 
 #. module: l10n_do_dgii_reports
 #. odoo-python
-#: code:addons/l10n_do_dgii_reports/models/account_invoice.py:0
+#: code:addons/l10n_do_dgii_reports/models/account_move.py:0
 #, python-format
 msgid "You cannot change the proportionality status of a reported invoice."
 msgstr "No se puede modificar el estado de proporcionalidad de una factura reportada."
