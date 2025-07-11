@@ -11,7 +11,7 @@
         Este módulo extiende las funcionalidades del l10n_do_ncf,
         integrando los reportes de declaraciones fiscales""",
 
-    'author': "Indexa, SRL, Iterativo SRL",
+    'author': "Indexa, SRL, Iterativo SRL, Jenrax SRL, Neotec",
     'license': 'LGPL-3',
     "category": "Localization",
     'version': '16.0.1.4.9',

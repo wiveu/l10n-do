@@ -1,7 +1,7 @@
 {
     'name': "Fiscal POS (Rep. Dominicana)",
     'summary': """Incorpora funcionalidades de facturación con NCF al POS.""",
-    'author': "Guavana, Indexa, Iterativo SRL",
+    'author': "Guavana, Indexa, Iterativo SRL, Neotec, Jenrax SRL",
     'license': 'LGPL-3',
     'website': "https://github.com/odoo-dominicana",
     'category': 'Localization',

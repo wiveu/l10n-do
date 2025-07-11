@@ -9,7 +9,7 @@
     'description': """
         This module searches for the company name by entering a Taxpayer Registration Number (RNC), if the company is valid.
     """,
-    'author': "Guavana",
+    'author': "Guavana, Jenrax SRL",
     'website': "https://www.guavana.com",
     'license': 'LGPL-3',
     'category': 'Localization',
