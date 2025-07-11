@@ -7,7 +7,7 @@
     """,
     "author": "Marcos, Guavana, Indexa, Iterativo SRL, Neotec, Jenrax SRL",
     "license": "LGPL-3",
-    "website": "https://github.com/odoo-dominicana",
+    'website': "https://github.com/Jenrax-git/l10n-do",
     "category": "Localization",
     "version": "16.0.2.2.9",
     # any module necessary for this one to work correctly

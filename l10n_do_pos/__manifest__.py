@@ -3,7 +3,7 @@
     'summary': """Incorpora funcionalidades de facturación con NCF al POS.""",
     'author': "Guavana, Indexa, Iterativo SRL, Neotec, Jenrax SRL",
     'license': 'LGPL-3',
-    'website': "https://github.com/odoo-dominicana",
+    'website': "https://github.com/Jenrax-git/l10n-do",
     'category': 'Localization',
     'version': '16.0.2.3.7',
     'depends': [

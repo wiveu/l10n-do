@@ -10,7 +10,7 @@
         This module searches for the company name by entering a Taxpayer Registration Number (RNC), if the company is valid.
     """,
     'author': "Guavana, Jenrax SRL",
-    'website': "https://www.guavana.com",
+    'website': "https://github.com/Jenrax-git/l10n-do",
     'license': 'LGPL-3',
     'category': 'Localization',
     'version': '16.0.1.1.1',
