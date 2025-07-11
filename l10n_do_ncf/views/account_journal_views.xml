@@ -29,11 +29,8 @@
         <field name="arch" type="xml">
             
             <xpath expr="//field[@name='type']" position="after">
-                <field name="l10n_do_fiscal_journal" widget="boolean_toggle" attrs="{
-                    'invisible':[
-                        ('type', 'in', ('cash','bank','general'))
-                    ]
-                }"/>
+                <field name="l10n_do_fiscal_journal" widget="boolean_toggle" 
+                       invisible="type in ('cash','bank','general')"/>
             </xpath>
             
         </field>

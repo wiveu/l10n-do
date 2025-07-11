@@ -20,17 +20,17 @@ class Partner(models.Model):
     )
     expense_type = fields.Selection(
         selection=[
-            ("01", _("01 - Personnel Expenses")),
-            ("02", _("02 - Work, Supplies and Services Expenses")),
-            ("03", _("03 - Leases")),
-            ("04", _("04 - Fixed Assets Expenses")),
-            ("05", _("05 - Representation Expenses")),
-            ("06", _("06 - Other Admitted Deductions")),
-            ("07", _("07 - Financial Expenses")),
-            ("08", _("08 - Extraordinary Expenses")),
-            ("09", _("09 - Purchases and Expenses that are part of Cost of Sale")),
-            ("10", _("10 - Asset Acquisitions")),
-            ("11", _("11 - Insurance Expenses")),
+            ("01", "01 - Personnel Expenses"),
+            ("02", "02 - Work, Supplies and Services Expenses"),
+            ("03", "03 - Leases"),
+            ("04", "04 - Fixed Assets Expenses"),
+            ("05", "05 - Representation Expenses"),
+            ("06", "06 - Other Admitted Deductions"),
+            ("07", "07 - Financial Expenses"),
+            ("08", "08 - Extraordinary Expenses"),
+            ("09", "09 - Purchases and Expenses that are part of Cost of Sale"),
+            ("10", "10 - Asset Acquisitions"),
+            ("11", "11 - Insurance Expenses"),
         ],
         string="Expense Type",
     )
@@ -112,8 +112,20 @@ class Partner(models.Model):
     def get_sale_fiscal_type_id_selection(self):
         return {
             "sale_fiscal_type_id": self.sale_fiscal_type_id.id,
-            "sale_fiscal_type_list": self.sale_fiscal_type_list,
-            "sale_fiscal_type_vat": self.sale_fiscal_type_vat
+            "sale_fiscal_type_list": [
+                {"id": "final", "name": _("Final Consumer"), "ticket_label": _("Consumer"), "is_default": True},
+                {"id": "fiscal", "name": _("Tax Credit")},
+                {"id": "gov", "name": _("Governmental")},
+                {"id": "special", "name": _("Special Regimes")},
+                {"id": "unico", "name": _("Single Income")},
+                {"id": "export", "name": _("Exports")}
+            ],
+            "sale_fiscal_type_vat": {
+                "rnc": ["fiscal", "gov", "special"],
+                "ced": ["final", "fiscal"],
+                "other": ["final"],
+                "no_vat": ["final", "unico", "export"]
+            }
         }
 
     def set_fiscal_position_from_fiscal_type(self, fiscal_type):
@@ -125,19 +137,3 @@ class Partner(models.Model):
                     self.with_company(company).sudo().write({
                         'property_account_position_id': company_new_fiscal_type.fiscal_position_id.id
                     })
-
-    sale_fiscal_type_list = [
-        {"id": "final", "name": _("Final Consumer"), "ticket_label": _("Consumer"), "is_default": True},
-        {"id": "fiscal", "name": _("Tax Credit")},
-        {"id": "gov", "name": _("Governmental")},
-        {"id": "special", "name": _("Special Regimes")},
-        {"id": "unico", "name": _("Single Income")},
-        {"id": "export", "name": _("Exports")}
-    ]
-
-    sale_fiscal_type_vat = {
-        "rnc": ["fiscal", "gov", "special"],
-        "ced": ["final", "fiscal"],
-        "other": ["final"],
-        "no_vat": ["final", "unico", "export"]
-    }
