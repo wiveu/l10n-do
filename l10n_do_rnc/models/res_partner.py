@@ -6,6 +6,8 @@
 from odoo import models, api, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons.base_vat.models.res_partner import _ref_vat
+from odoo. tools import LazyTranslate
+
 _lt = LazyTranslate(__name__)
 
 if _ref_vat:
