@@ -1,5 +1,5 @@
 {
-    "name": "Fiscal Accounting (Rep. Dominicana)",
+    "name": "NCF Management",
     "summary": """
         This module implements the administration and management of fiscal
         receipt numbers for compliance with norm 06-18 of the Dominican
@@ -23,7 +23,7 @@
         "data/ir_cron_data.xml",
         "data/account_fiscal_type_data.xml",
         # "data/report_layout_data.xml",
-        # "data/mail_template_data.xml",
+        "data/mail_template_data.xml",
         "data/update_sequences.xml",
 
         "security/ir_rule.xml",

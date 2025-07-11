@@ -1,6 +1,6 @@
 <section class="oe_container oe_dark">
     <div class="oe_row oe_spaced">
-        <h1 class="oe_slogan" style="color:#875A7B;">Fiscal Accounting (Rep. Dominicana)</h1>
+        <h1 class="oe_slogan" style="color:#875A7B;">NCF Management</h1>
         <h2 class="oe_slogan">
             Complete NCF (Número de Comprobante Fiscal) Management for Dominican Republic
         </h2>
@@ -73,6 +73,66 @@
         </div>
         <div class="oe_span6">
             <img class="oe_picture oe_screenshot" src="sequence_management.png" alt="Sequence Management"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan" style="color:#875A7B;">How to Create NCF Sequences (Fiscal Sequences)</h3>
+        <div class="oe_span12">
+            <p class='oe_mt32 text-justify'>
+                <strong>Step-by-step guide to create Fiscal Sequences (account.fiscal.sequence):</strong>
+            </p>
+            <div class="oe_mt16">
+                <h4><i class="fa fa-arrow-right" style="color:#875A7B;"></i> Step 1: Access Fiscal Sequences</h4>
+                <p class="oe_mt8">Navigate to <strong>Accounting</strong> &gt; <strong>Configuration</strong> &gt; <strong>Localization</strong> &gt; <strong>Fiscal Sequences</strong></p>
+                
+                <h4 class="oe_mt16"><i class="fa fa-arrow-right" style="color:#875A7B;"></i> Step 2: Create New Sequence</h4>
+                <p class="oe_mt8">Click the <strong>"Create"</strong> button to add a new fiscal sequence</p>
+                
+                <h4 class="oe_mt16"><i class="fa fa-arrow-right" style="color:#875A7B;"></i> Step 3: Configure Basic Information</h4>
+                <ul class="oe_mt8">
+                    <li><strong>Name:</strong> Descriptive name for the sequence (e.g., "NCF 01 - Credit Invoice 2024")</li>
+                    <li><strong>Fiscal Type:</strong> Select the appropriate NCF type (01-17)</li>
+                    <li><strong>Company:</strong> Select your company</li>
+                    <li><strong>State:</strong> Leave as "Draft" until ready to activate</li>
+                </ul>
+                
+                <h4 class="oe_mt16"><i class="fa fa-arrow-right" style="color:#875A7B;"></i> Step 4: Set Sequence Range</h4>
+                <ul class="oe_mt8">
+                    <li><strong>From Number:</strong> Starting number of your NCF range (e.g., 00000001)</li>
+                    <li><strong>To Number:</strong> Ending number of your NCF range (e.g., 01000000)</li>
+                    <li><strong>Next Number:</strong> Will be set automatically to the "From Number"</li>
+                </ul>
+                
+                <h4 class="oe_mt16"><i class="fa fa-arrow-right" style="color:#875A7B;"></i> Step 5: Set Authorization Details</h4>
+                <ul class="oe_mt8">
+                    <li><strong>Authorization Date:</strong> Date when DGII authorized this sequence</li>
+                    <li><strong>Expiration Date:</strong> When the sequence expires (usually 2 years from authorization)</li>
+                    <li><strong>Authorization Number:</strong> Official authorization number from DGII</li>
+                </ul>
+                
+                <h4 class="oe_mt16"><i class="fa fa-arrow-right" style="color:#875A7B;"></i> Step 6: Configure Usage</h4>
+                <ul class="oe_mt8">
+                    <li><strong>Warning Percentage:</strong> Set a percentage (e.g., 90%) to receive warnings when sequence is nearly exhausted</li>
+                    <li><strong>Fiscal Journals:</strong> Assign this sequence to specific accounting journals</li>
+                </ul>
+                
+                <h4 class="oe_mt16"><i class="fa fa-arrow-right" style="color:#875A7B;"></i> Step 7: Activate Sequence</h4>
+                <p class="oe_mt8">Once all information is complete, change the <strong>State</strong> to <strong>"Active"</strong> to start using the sequence</p>
+                
+                <div class="alert alert-info oe_mt16">
+                    <h4><i class="fa fa-info-circle"></i> Important Notes:</h4>
+                    <ul>
+                        <li>Each NCF type (01-17) requires its own sequence</li>
+                        <li>Sequences must be authorized by DGII before activation</li>
+                        <li>Monitor sequence usage regularly to avoid running out of numbers</li>
+                        <li>Request new sequences from DGII before current ones expire</li>
+                        <li>The system will automatically warn you when sequences are nearly exhausted</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>

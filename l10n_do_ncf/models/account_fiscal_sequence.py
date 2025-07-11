@@ -32,15 +32,11 @@ class AccountFiscalSequence(models.Model):
     name = fields.Char(
         string="Authorization number",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     expiration_date = fields.Date(
         string="Expiration Date",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
         default=datetime.strptime(
             str(int(str(fields.Date.today())[0:4]) + 1) + "-12-31", "%Y-%m-%d"
@@ -50,8 +46,6 @@ class AccountFiscalSequence(models.Model):
         string='Fiscal type',
         comodel_name="account.fiscal.type",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     type = fields.Selection(
@@ -61,8 +55,6 @@ class AccountFiscalSequence(models.Model):
     sequence_start = fields.Integer(
         string="Start",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
         default=1,
         copy=False,
@@ -70,8 +62,6 @@ class AccountFiscalSequence(models.Model):
     sequence_end = fields.Integer(
         string="End",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
         default=1,
         copy=False,
@@ -117,9 +107,7 @@ class AccountFiscalSequence(models.Model):
     company_id = fields.Many2one(
         comodel_name="res.company",
         default=lambda self: self.env.company,
-        readonly=True,
         required=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
 
