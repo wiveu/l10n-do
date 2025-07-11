@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml ver            <xpath expr="//page[@name='other_info']" position="after">
+                <page name="dgii_fields" string="DGII" groups="account.group_account_user" invisible="move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')">
+                    <group invisible="move_type not in ('out_invoice', 'out_refund')">n="1.0" encoding                    <group invisible="move_type not in ('in_invoice', 'in_refund')">"UTF-8"?>
 <odoo>
 
     <record id="invoice_form_inherited" model="ir.ui.view">

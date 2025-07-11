@@ -17,7 +17,7 @@ class InvoiceServiceTypeDetail(models.Model):
     ]
 
 
-class AccountInvoice(models.Model):
+class AccountMove(models.Model):
     _inherit = 'account.move'
 
     def _get_invoice_payment_widget(self):                    

@@ -163,7 +163,7 @@ class AccountMoveReversal(models.TransientModel):
     #             ) % (invoice_type[inv.move_type], inv.id, inv.number)
     #             debit_note.message_post(body=message)
     #             if wizard.refund_method == "apply_refund":
-    #                 debit_note.action_invoice_open()
+    #                 debit_note.action_post()
 
     #             action_map = {
     #                 "out_invoice": "action_invoice_out_debit_note",

@@ -10,11 +10,11 @@
             <xpath expr="//field[@name='type']" position="after">
                 <field name="l10n_do_fiscal_journal"
                        widget="boolean_toggle"
-                       attrs="{'invisible':[('type', 'in', ('cash','bank','general'))]}"/>
+                       invisible="type in ('cash','bank','general')"/>
                 <field name="payment_form"
-                       attrs="{'invisible':[('type', 'in', ('sale','purchase','general'))],
-                               'required': [('country_code', '=', 'DO'), ('type', 'in', ('cash', 'bank'))]
-                       }"/>
+                       invisible="type in ('sale','purchase','general')"
+                       required="country_code == 'DO' and type in ('cash', 'bank')"
+                       />
 
 
             </xpath>

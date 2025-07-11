@@ -3,10 +3,10 @@ from datetime import timedelta as td
 from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tools import float_is_zero
-from .common import AccountInvoiceCommon, environment
+from .common import AccountMoveCommon, environment
 
 
-class AccountInvoiceTests(AccountInvoiceCommon):
+class AccountMoveTests(AccountMoveCommon):
 
     def test_001_invoice_fiscal_sequence_id(self):
         """
@@ -211,7 +211,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "invoice_line_ids": self.invoice_line_data,
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         self.assertEqual(partner_id.sale_fiscal_type_id.id, self.fiscal_type_consumo)
 
@@ -237,7 +237,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "move_type": "in_invoice",
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         self.assertEqual(
             partner_id.purchase_fiscal_type_id.id, self.fiscal_type_informal
@@ -261,7 +261,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         )
 
         with self.assertRaises(UserError):
-            invoice_id.action_invoice_open()
+            invoice_id.action_post()
 
     def test_012_no_vat_partner_amount_total_limit(self):
 
@@ -304,7 +304,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         )
 
         with self.assertRaises(UserError):
-            invoice_id.action_invoice_open()
+            invoice_id.action_post()
 
         out_invoice_id = self.invoice_obj.create(
             {
@@ -315,7 +315,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         )
 
         with self.assertRaises(UserError):
-            out_invoice_id.action_invoice_open()
+            out_invoice_id.action_post()
 
     def test_013_fiscal_customer_refund_percentage(self):
         """
@@ -330,7 +330,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "invoice_line_ids": self.invoice_line_data,
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {"active_ids": [invoice_id.id], "active_id": invoice_id.id}
@@ -345,7 +345,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         refund_wizard_id.invoice_refund()
 
         credit_note_id = self.invoice_obj.search([("move_type", "=", "out_refund")], limit=1)
-        credit_note_id.action_invoice_open()
+        credit_note_id.action_post()
 
         cn_type = self.fiscal_type_obj.browse(self.fiscal_type_cn)
 
@@ -372,7 +372,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "invoice_line_ids": self.invoice_line_data,
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {"active_ids": [invoice_id.id], "active_id": invoice_id.id}
@@ -387,7 +387,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         refund_wizard_id.invoice_refund()
 
         credit_note_id = self.invoice_obj.search([("move_type", "=", "out_refund")], limit=1)
-        credit_note_id.action_invoice_open()
+        credit_note_id.action_post()
 
         cn_type = self.fiscal_type_obj.browse(self.fiscal_type_cn)
 
@@ -410,7 +410,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "move_type": "in_invoice",
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {"active_ids": [invoice_id.id], "active_id": invoice_id.id}
@@ -426,7 +426,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         refund_wizard_id.invoice_refund()
 
         credit_note_id = self.invoice_obj.search([("move_type", "=", "in_refund")], limit=1)
-        credit_note_id.action_invoice_open()
+        credit_note_id.action_post()
 
         self.assertEqual(credit_note_id.ref, "B0400000001")
 
@@ -453,7 +453,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "move_type": "in_invoice",
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {"active_ids": [invoice_id.id], "active_id": invoice_id.id}
@@ -469,7 +469,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         refund_wizard_id.invoice_refund()
 
         credit_note_id = self.invoice_obj.search([("move_type", "=", "in_refund")], limit=1)
-        credit_note_id.action_invoice_open()
+        credit_note_id.action_post()
 
         self.assertEqual(credit_note_id.ref, "B0400000001")
 
@@ -490,7 +490,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "invoice_line_ids": self.invoice_line_data,
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {
@@ -511,7 +511,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         debit_note_id = self.invoice_obj.search(
             [("move_type", "=", "out_invoice"), ("is_debit_note", "=", True)], limit=1
         )
-        debit_note_id.action_invoice_open()
+        debit_note_id.action_post()
 
         dn_type = self.fiscal_type_obj.browse(self.fiscal_type_dn)
 
@@ -538,7 +538,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "invoice_line_ids": self.invoice_line_data,
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {
@@ -559,7 +559,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         debit_note_id = self.invoice_obj.search(
             [("move_type", "=", "out_invoice"), ("is_debit_note", "=", True)], limit=1
         )
-        debit_note_id.action_invoice_open()
+        debit_note_id.action_post()
 
         dn_type = self.fiscal_type_obj.browse(self.fiscal_type_dn)
 
@@ -582,7 +582,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "move_type": "in_invoice",
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {
@@ -603,7 +603,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         debit_note_id = self.invoice_obj.search(
             [("move_type", "=", "in_invoice"), ("is_debit_note", "=", True)], limit=1
         )
-        debit_note_id.action_invoice_open()
+        debit_note_id.action_post()
 
         self.assertEqual(debit_note_id.fiscal_type_id.id, self.fiscal_type_dn_purchase)
         self.assertEqual(debit_note_id.origin_out, invoice_id.ref)
@@ -628,7 +628,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "move_type": "in_invoice",
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {
@@ -649,7 +649,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
         debit_note_id = self.invoice_obj.search(
             [("move_type", "=", "in_invoice"), ("is_debit_note", "=", True)], limit=1
         )
-        debit_note_id.action_invoice_open()
+        debit_note_id.action_post()
 
         self.assertEqual(debit_note_id.fiscal_type_id.id, self.fiscal_type_dn_purchase)
         self.assertEqual(debit_note_id.origin_out, invoice_id.ref)
@@ -669,7 +669,7 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "move_type": "in_invoice",
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         refund_wizard_id = self.invoice_refund_obj.with_context(
             {"active_ids": [invoice_id.id], "active_id": invoice_id.id}
@@ -703,6 +703,6 @@ class AccountInvoiceTests(AccountInvoiceCommon):
                 "invoice_line_ids": self.invoice_line_data,
             }
         )
-        invoice_id.action_invoice_open()
+        invoice_id.action_post()
 
         assert invoice_id.ncf_expiration_date

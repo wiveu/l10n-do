@@ -20,79 +20,79 @@
     </record>
 
     <record id="honorarios_seriviocs_profesionales_fisicas" model="invoice.service.type.detail">
-        <field name="name">Honorarios por Servicios Profesionales (Personas Físicas)</field>
+        <field name="name">Professional Services Fees (Individuals)</field>
         <field name="code">22</field>
         <field name="parent_code">02</field>
     </record>
 
     <record id="seguridad_mensajeria_transporte_fisicas" model="invoice.service.type.detail">
-        <field name="name">Seguridad, Mensajería, Transporte y otros Servicios (Personas Físicas)</field>
+        <field name="name">Security, Messaging, Transport and Other Services (Individuals)</field>
         <field name="code">23</field>
         <field name="parent_code">02</field>
     </record>
 
     <record id="seguridad_mensajeria_transporte_morales" model="invoice.service.type.detail">
-        <field name="name">Seguridad, Mensajería, Transporte y otros Servicios (Personas Morales)</field>
+        <field name="name">Security, Messaging, Transport and Other Services (Companies)</field>
         <field name="code">24</field>
         <field name="parent_code">02</field>
     </record>
 
     <record id="inmuebles_fisicas" model="invoice.service.type.detail">
-        <field name="name">De Inmuebles (A Personas Físicas)</field>
+        <field name="name">Real Estate (To Individuals)</field>
         <field name="code">31</field>
         <field name="parent_code">03</field>
     </record>
 
     <record id="inmuebles_morales" model="invoice.service.type.detail">
-        <field name="name">De Inmuebles (A Personas Morales)</field>
+        <field name="name">Real Estate (To Companies)</field>
         <field name="code">32</field>
         <field name="parent_code">03</field>
     </record>
 
     <record id="otros_arrendamientos" model="invoice.service.type.detail">
-        <field name="name">Otros Arrendamientos</field>
+        <field name="name">Other Leases</field>
         <field name="code">33</field>
         <field name="parent_code">03</field>
     </record>
 
     <record id="reparaciones" model="invoice.service.type.detail">
-        <field name="name">Reparación</field>
+        <field name="name">Repair</field>
         <field name="code">41</field>
         <field name="parent_code">04</field>
     </record>
 
     <record id="mantenimiento" model="invoice.service.type.detail">
-        <field name="name">Mantenimiento</field>
+        <field name="name">Maintenance</field>
         <field name="code">42</field>
         <field name="parent_code">04</field>
     </record>
 
     <record id="relaciones_publicas" model="invoice.service.type.detail">
-        <field name="name">Relaciones Públicas</field>
+        <field name="name">Public Relations</field>
         <field name="code">51</field>
         <field name="parent_code">05</field>
     </record>
 
     <record id="publicidad_promocional" model="invoice.service.type.detail">
-        <field name="name">Publicidad Promocional</field>
+        <field name="name">Promotional Advertising</field>
         <field name="code">52</field>
         <field name="parent_code">05</field>
     </record>
 
     <record id="promocional" model="invoice.service.type.detail">
-        <field name="name">Promocional</field>
+        <field name="name">Promotional</field>
         <field name="code">53</field>
         <field name="parent_code">05</field>
     </record>
 
     <record id="otros_gastos_representacion" model="invoice.service.type.detail">
-        <field name="name">Otros Gastos de Representación</field>
+        <field name="name">Other Representation Expenses</field>
         <field name="code">54</field>
         <field name="parent_code">05</field>
     </record>
 
     <record id="prestamos_bancos" model="invoice.service.type.detail">
-        <field name="name">Por Préstamos con Bancos</field>
+        <field name="name">For Bank Loans</field>
         <field name="code">61</field>
         <field name="parent_code">06</field>
     </record>

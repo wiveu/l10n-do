@@ -35,9 +35,9 @@ class CommonSetup(TransactionCase):
         self.fiscal_type_unico = self.ref("l10n_do_ncf.fiscal_type_unico")
 
 
-class AccountInvoiceCommon(CommonSetup):
+class AccountMoveCommon(CommonSetup):
     def setUp(self):
-        super(AccountInvoiceCommon, self).setUp()
+        super(AccountMoveCommon, self).setUp()
 
         self.invoice_obj = self.env["account.move"]
         self.journal_obj = self.env["account.journal"]

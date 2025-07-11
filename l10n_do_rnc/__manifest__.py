@@ -13,7 +13,7 @@
     'website': "https://github.com/Jenrax-git/l10n-do",
     'license': 'LGPL-3',
     'category': 'Localization',
-    'version': '16.0.1.1.1',
+    'version': '18.0.1.1.1',
     'depends': [
         'base',
         'contacts',

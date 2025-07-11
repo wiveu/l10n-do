@@ -1,15 +1,15 @@
 {
     "name": "Fiscal Accounting (Rep. Dominicana)",
     "summary": """
-        Este módulo implementa la administración y gestión de los números de
-        comprobantes fiscales para el cumplimento de la norma 06-18 de la
-        Dirección de Impuestos Internos en la República Dominicana.
+        This module implements the administration and management of fiscal
+        receipt numbers for compliance with norm 06-18 of the Dominican
+        Republic Internal Revenue Service.
     """,
     "author": "Marcos, Guavana, Indexa, Iterativo SRL, Neotec, Jenrax SRL",
     "license": "LGPL-3",
     'website': "https://github.com/Jenrax-git/l10n-do",
     "category": "Localization",
-    "version": "16.0.2.2.9",
+    "version": "18.0.2.2.9",
     # any module necessary for this one to work correctly
     "depends": [
         "base",
@@ -31,15 +31,15 @@
         "security/res_groups.xml",
 
         "wizard/account_fiscal_sequence_validate_wizard_views.xml",
-        "wizard/account_invoice_refund_views.xml",
+        "wizard/account_move_refund_views.xml",
 
         # "views/account_report.xml",
-        "views/account_invoice_views.xml",
+        "views/account_move_views.xml",
         "views/account_journal_views.xml",
         "views/res_partner_views.xml",
         "views/account_fiscal_sequence_views.xml",
         'views/res_company_views.xml',
-        'views/account_invoice_cancel_views.xml',
+        'views/account_move_cancel_views.xml',
         # "views/backend_js.xml",
 
         "views/report_templates.xml",

@@ -1,0 +1,78 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_do_dgii_reports
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.honorarios_seriviocs_profesionales_fisicas
+msgid "Professional Services Fees (Individuals)"
+msgstr "Honorarios por Servicios Profesionales (Personas Físicas)"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.seguridad_mensajeria_transporte_fisicas
+msgid "Security, Messaging, Transport and Other Services (Individuals)"
+msgstr "Seguridad, Mensajería, Transporte y otros Servicios (Personas Físicas)"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.seguridad_mensajeria_transporte_morales
+msgid "Security, Messaging, Transport and Other Services (Companies)"
+msgstr "Seguridad, Mensajería, Transporte y otros Servicios (Personas Morales)"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.inmuebles_fisicas
+msgid "Real Estate (To Individuals)"
+msgstr "De Inmuebles (A Personas Físicas)"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.inmuebles_morales
+msgid "Real Estate (To Companies)"
+msgstr "De Inmuebles (A Personas Morales)"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.otros_arrendamientos
+msgid "Other Leases"
+msgstr "Otros Arrendamientos"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.reparaciones
+msgid "Repair"
+msgstr "Reparación"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.mantenimiento
+msgid "Maintenance"
+msgstr "Mantenimiento"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.relaciones_publicas
+msgid "Public Relations"
+msgstr "Relaciones Públicas"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.publicidad_promocional
+msgid "Promotional Advertising"
+msgstr "Publicidad Promocional"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.promocional
+msgid "Promotional"
+msgstr "Promocional"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.otros_gastos_representacion
+msgid "Other Representation Expenses"
+msgstr "Otros Gastos de Representación"
+
+#. module: l10n_do_dgii_reports
+#: model:invoice.service.type.detail,name:l10n_do_dgii_reports.prestamos_bancos
+msgid "For Bank Loans"
+msgstr "Por Préstamos con Bancos"

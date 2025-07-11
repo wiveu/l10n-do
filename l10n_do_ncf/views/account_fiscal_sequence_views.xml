@@ -9,11 +9,11 @@
                 <header>
                     <button name="action_confirm" string="Confirm" type="object"
                             class="oe_highlight"
-                            attrs="{'invisible':[('state','!=','draft')]}"/>
+                            invisible="state != 'draft'"/>
                     <button name="action_queue" string="Queue" type="object"
-                            attrs="{'invisible':['|', ('state','!=','draft'), ('can_be_queue', '=', False)]}"/>
+                            invisible="state != 'draft' or not can_be_queue"/>
                     <button name="action_cancel" string="Cancel" type="object"
-                            attrs="{'invisible':[('state','in', ('cancelled', 'draft'))]}"/>
+                            invisible="state in ('cancelled', 'draft')"/>
                     <field name="state" widget="statusbar" statusbar_visible="active,depleted"/>
                 </header>
                 <sheet>
@@ -23,7 +23,7 @@
                                 name="action_view_sequence"
                                 icon="fa-arrow-right" type="object"
                                 groups="base.group_system"
-                                attrs="{'invisible': [('sequence_id', '=', False)] }">
+                                invisible="not sequence_id">
                             <span class="o_stat_text">Sequence</span>
                         </button>
                     </div>
@@ -52,10 +52,10 @@
                             </div>
                             <field name="number_next_actual" groups="base.group_no_one"/>
                             <field name="sequence_remaining"
-                                   attrs="{'invisible': [('state', 'in', ('draft', 'cancelled'))]}"/>
+                                   invisible="state in ('draft', 'cancelled')"/>
                             <field 
                                 name="next_fiscal_number"
-                                attrs="{'invisible': [('state', 'in', ('draft', 'cancelled', 'depleted'))]}"
+                                invisible="state in ('draft', 'cancelled', 'depleted')"
                             />
                             <field name="type" invisible="1"/>
                             <field name="sequence_id" invisible="1"/>
@@ -77,7 +77,7 @@
         <field name="name">account.fiscal.sequence.tree</field>
         <field name="model">account.fiscal.sequence</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="fiscal_type_id"/>
                 <field name="next_fiscal_number"/>
@@ -85,7 +85,7 @@
                 <field name="sequence_end"/>
                 <field name="state"/>
                 <field name="company_id" groups="base.group_multi_company"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -179,12 +179,12 @@
         <field name="name">account.fiscal.type.tree</field>
         <field name="model">account.fiscal.type</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="prefix"/>
                 <field name="type"/>
-            </tree>
+            </list>
         </field>
     </record>
 

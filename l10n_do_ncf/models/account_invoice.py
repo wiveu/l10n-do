@@ -27,7 +27,7 @@ ncf_dict = {
 }
 
 
-class AccountInvoice(models.Model):
+class AccountMove(models.Model):
     _inherit = "account.move"
 
     fiscal_type_id = fields.Many2one(
@@ -233,7 +233,7 @@ class AccountInvoice(models.Model):
     # TODO: Migrate this
     # @api.constrains("state", "tax_line_ids")
     # def validate_special_exempt(self):
-    #     """ Validates an invoice with Regímenes Especiales fiscal type
+    #     """ Validates an invoice with Special Regimes fiscal type
     #         does not contain nor ITBIS or ISC.
     #         See DGII Norma 05-19, Art 3 for further information.
     #     """
@@ -257,7 +257,7 @@ class AccountInvoice(models.Model):
     #                 raise UserError(
     #                     _(
     #                         "You cannot validate and invoice of Fiscal Type "
-    #                         "Regímen Especial with ITBIS/ISC.\n\n"
+    #                         "Special Regime with ITBIS/ISC.\n\n"
     #                         "See DGII General Norm 05-19, Art. 3 for further "
     #                         "information"
     #                     )
@@ -333,7 +333,7 @@ class AccountInvoice(models.Model):
             self.fiscal_type_id = False
             self.fiscal_sequence_id = False
 
-        return super(AccountInvoice, self)._onchange_journal_id()
+        return super(AccountMove, self)._onchange_journal_id()
 
     @api.onchange("fiscal_type_id")
     def _onchange_fiscal_type(self):
@@ -377,7 +377,7 @@ class AccountInvoice(models.Model):
                             )
                         )
                     self.fiscal_type_id = fiscal_type
-                    return super(AccountInvoice, self)._onchange_partner_id()
+                    return super(AccountMove, self)._onchange_partner_id()
                 self.fiscal_type_id = self.partner_id.purchase_fiscal_type_id
 
             elif self.partner_id and not self.fiscal_type_id and self.move_type in ['in_refund', 'out_refund']:
@@ -387,7 +387,7 @@ class AccountInvoice(models.Model):
                 ])
                 self.fiscal_type_id = fiscal_refund[0] if fiscal_refund else False
 
-        return super(AccountInvoice, self)._onchange_partner_id()
+        return super(AccountMove, self)._onchange_partner_id()
 
     def _post(self, soft=True):
         """ Before an invoice is changed to the 'open' state, validate that all
@@ -454,7 +454,7 @@ class AccountInvoice(models.Model):
                 if inv.fiscal_type_id.requires_document and not inv.partner_id.vat:
                     raise UserError(
                         _(
-                            "Partner [{}] {} doesn't have RNC/Céd, "
+                            "Partner [{}] {} doesn't have RNC/ID, "
                             "is required for NCF type {}"
                         ).format(
                             inv.partner_id.id,
@@ -473,7 +473,7 @@ class AccountInvoice(models.Model):
                             _(
                                 u"if the invoice amount is greater than "
                                 u"RD$250,000.00 "
-                                u"the customer should have RNC or Céd"
+                                u"the customer should have RNC or ID"
                                 u"for make invoice"
                             )
                         )
@@ -517,7 +517,7 @@ class AccountInvoice(models.Model):
                             ).format(inv.amount_total, origin_invoice.amount_total)
                         )
 
-        res = super(AccountInvoice, self)._post(soft)
+        res = super(AccountMove, self)._post(soft)
 
         for inv in self:
             if inv.is_l10n_do_fiscal_invoice \
@@ -557,7 +557,7 @@ class AccountInvoice(models.Model):
             return self.action_invoice_cancel()
             
         else:
-            return super(AccountInvoice, self).button_cancel()
+            return super(AccountMove, self).button_cancel()
 
         
         
@@ -571,7 +571,7 @@ class AccountInvoice(models.Model):
         account = context.get("account")
 
         if not refund_type:
-            return super(AccountInvoice, self).refund(
+            return super(AccountMove, self).refund(
                 invoice_date=invoice_date,
                 date=date,
                 description=description,
@@ -656,7 +656,7 @@ class AccountInvoice(models.Model):
     def create(self, vals_list):
         # Add default fiscal type from sales and purchase orders
         
-        res = super(AccountInvoice, self).create(vals_list)
+        res = super(AccountMove, self).create(vals_list)
         
         fiscal_invoices = res.filtered(
             lambda i: i.is_l10n_do_fiscal_invoice and not \

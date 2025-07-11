@@ -3,27 +3,27 @@ from odoo import models, api, fields, _
 from odoo.exceptions import UserError
 
 
-class AccountInvoiceCancel(models.TransientModel):
+class AccountMoveCancel(models.TransientModel):
     """
     This wizard will cancel the all the selected invoices.
     If in the journal, the option allow cancelling entry is not selected then
     it will give warning message.
     """
 
-    _name = "account.invoice.cancel"
+    _name = "account.move.cancel"
     _description = "Cancel the Selected Invoice"
 
     annulation_type = fields.Selection(
-        [("01", "01 - Deterioro de Factura Pre-impresa"),
-         ("02", "02 - Errores de Impresión (Factura Pre-impresa)"),
-         ("03", u"03 - Impresión Defectuosa"),
-         ("04", u"04 - Corrección de la Información"),
-         ("05", "05 - Cambio de Productos"),
-         ("06", u"06 - Devolución de Productos"),
-         ("07", u"07 - Omisión de Productos"),
-         ("08", "08 - Errores en Secuencia de NCF"),
-         ("09", "09 - Por Cese de Operaciones"),
-         ("10", u"10 - Pérdida o Hurto de Talonarios"),
+        [("01", _("01 - Pre-printed Invoice Deterioration")),
+         ("02", _("02 - Printing Errors (Pre-printed Invoice)")),
+         ("03", _("03 - Defective Printing")),
+         ("04", _("04 - Information Correction")),
+         ("05", _("05 - Product Change")),
+         ("06", _("06 - Product Return")),
+         ("07", _("07 - Product Omission")),
+         ("08", _("08 - NCF Sequence Errors")),
+         ("09", _("09 - Due to Operations Cessation")),
+         ("10", _("10 - Loss or Theft of Checkbooks")),
          ],
         required=True,
         default=lambda self: self._context.get('annulation_type', '04'))

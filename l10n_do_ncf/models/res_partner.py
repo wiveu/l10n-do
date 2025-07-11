@@ -20,17 +20,17 @@ class Partner(models.Model):
     )
     expense_type = fields.Selection(
         selection=[
-            ("01", "01 - Gastos de Personal"),
-            ("02", "02 - Gastos por Trabajo, Suministros y Servicios"),
-            ("03", "03 - Arrendamientos"),
-            ("04", "04 - Gastos de Activos Fijos"),
-            ("05", u"05 - Gastos de Representación"),
-            ("06", "06 - Otras Deducciones Admitidas"),
-            ("07", "07 - Gastos Financieros"),
-            ("08", "08 - Gastos Extraordinarios"),
-            ("09", "09 - Compras y Gastos que forman parte del Costo de Venta"),
-            ("10", "10 - Adquisiciones de Activos"),
-            ("11", "11 - Gastos de Seguro"),
+            ("01", _("01 - Personnel Expenses")),
+            ("02", _("02 - Work, Supplies and Services Expenses")),
+            ("03", _("03 - Leases")),
+            ("04", _("04 - Fixed Assets Expenses")),
+            ("05", _("05 - Representation Expenses")),
+            ("06", _("06 - Other Admitted Deductions")),
+            ("07", _("07 - Financial Expenses")),
+            ("08", _("08 - Extraordinary Expenses")),
+            ("09", _("09 - Purchases and Expenses that are part of Cost of Sale")),
+            ("10", _("10 - Asset Acquisitions")),
+            ("11", _("11 - Insurance Expenses")),
         ],
         string="Expense Type",
     )
@@ -127,12 +127,12 @@ class Partner(models.Model):
                     })
 
     sale_fiscal_type_list = [
-        {"id": "final", "name": "Consumo", "ticket_label": "Consumo", "is_default": True},
-        {"id": "fiscal", "name": "Crédito Fiscal"},
-        {"id": "gov", "name": "Gubernamental"},
-        {"id": "special", "name": "Regímenes Especiales"},
-        {"id": "unico", "name": "Único Ingreso"},
-        {"id": "export", "name": "Exportaciones"}
+        {"id": "final", "name": _("Final Consumer"), "ticket_label": _("Consumer"), "is_default": True},
+        {"id": "fiscal", "name": _("Tax Credit")},
+        {"id": "gov", "name": _("Governmental")},
+        {"id": "special", "name": _("Special Regimes")},
+        {"id": "unico", "name": _("Single Income")},
+        {"id": "export", "name": _("Exports")}
     ]
 
     sale_fiscal_type_vat = {

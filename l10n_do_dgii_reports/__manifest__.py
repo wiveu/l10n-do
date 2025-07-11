@@ -5,16 +5,16 @@
 # © 2018 Eneldo Serrata <eneldo@marcos.do>
 
 {
-    'name': "Declaraciones DGII",
+    'name': "DGII Reports",
 
     'summary': """
-        Este módulo extiende las funcionalidades del l10n_do_ncf,
-        integrando los reportes de declaraciones fiscales""",
+        This module extends the functionalities of l10n_do_ncf,
+        integrating fiscal declaration reports""",
 
     'author': "Indexa, SRL, Iterativo SRL, Jenrax SRL, Neotec",
     'license': 'LGPL-3',
     "category": "Localization",
-    'version': '16.0.1.4.9',
+    'version': '18.0.1.4.9',
     'website': "https://github.com/Jenrax-git/l10n-do",
     # any module necessary for this one to work correctly
     'depends': [
@@ -35,7 +35,7 @@
 
         'views/res_partner_views.xml',
         'views/account_account_views.xml',
-        'views/account_invoice_views.xml',
+        'views/account_move_views.xml',
         'views/dgii_report_views.xml',
         'views/account_tax_views.xml',
         'views/res_config_settings_views.xml',
@@ -45,8 +45,8 @@
 
     'assets':{
         'web.assets_backend': [
-            '/l10n_do_dgii_reports/static/src/scss/dgii_reports.scss',
-            '/l10n_do_dgii_reports/static/src/js/widget.js',
+            'l10n_do_dgii_reports/static/src/scss/dgii_reports.scss',
+            'l10n_do_dgii_reports/static/src/js/widget.js',
         ]
     },
 

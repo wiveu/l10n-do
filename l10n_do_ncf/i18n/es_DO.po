@@ -1615,3 +1615,143 @@ msgstr ""
 #, python-format
 msgid "vendor"
 msgstr "Proveedor"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "01 - Personnel Expenses"
+msgstr "01 - Gastos de Personal"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "02 - Work, Supplies and Services Expenses"
+msgstr "02 - Gastos por Trabajo, Suministros y Servicios"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "03 - Leases"
+msgstr "03 - Arrendamientos"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "04 - Fixed Assets Expenses"
+msgstr "04 - Gastos de Activos Fijos"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "05 - Representation Expenses"
+msgstr "05 - Gastos de Representación"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "06 - Other Admitted Deductions"
+msgstr "06 - Otras Deducciones Admitidas"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "07 - Financial Expenses"
+msgstr "07 - Gastos Financieros"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "08 - Extraordinary Expenses"
+msgstr "08 - Gastos Extraordinarios"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "09 - Purchases and Expenses that are part of Cost of Sale"
+msgstr "09 - Compras y Gastos que forman parte del Costo de Venta"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "10 - Asset Acquisitions"
+msgstr "10 - Adquisiciones de Activos"
+
+#. module: l10n_do_ncf
+#: selection:res.partner,expense_type:0
+msgid "11 - Insurance Expenses"
+msgstr "11 - Gastos de Seguro"
+
+#. module: l10n_do_ncf
+#: model:res.partner,name:l10n_do_ncf.res_partner_fiscal_type_final
+msgid "Final Consumer"
+msgstr "Consumo"
+
+#. module: l10n_do_ncf
+#: model:res.partner,name:l10n_do_ncf.res_partner_fiscal_type_final
+msgid "Consumer"
+msgstr "Consumo"
+
+#. module: l10n_do_ncf
+#: model:res.partner,name:l10n_do_ncf.res_partner_fiscal_type_fiscal
+msgid "Tax Credit"
+msgstr "Crédito Fiscal"
+
+#. module: l10n_do_ncf
+#: model:res.partner,name:l10n_do_ncf.res_partner_fiscal_type_gov
+msgid "Governmental"
+msgstr "Gubernamental"
+
+#. module: l10n_do_ncf
+#: model:res.partner,name:l10n_do_ncf.res_partner_fiscal_type_special
+msgid "Special Regimes"
+msgstr "Regímenes Especiales"
+
+#. module: l10n_do_ncf
+#: model:res.partner,name:l10n_do_ncf.res_partner_fiscal_type_unico
+msgid "Single Income"
+msgstr "Único Ingreso"
+
+#. module: l10n_do_ncf
+#: model:res.partner,name:l10n_do_ncf.res_partner_fiscal_type_export
+msgid "Exports"
+msgstr "Exportaciones"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "01 - Pre-printed Invoice Deterioration"
+msgstr "01 - Deterioro de Factura Pre-impresa"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "02 - Printing Errors (Pre-printed Invoice)"
+msgstr "02 - Errores de Impresión (Factura Pre-impresa)"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "03 - Defective Printing"
+msgstr "03 - Impresión Defectuosa"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "04 - Information Correction"
+msgstr "04 - Corrección de la Información"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "05 - Product Change"
+msgstr "05 - Cambio de Productos"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "06 - Product Return"
+msgstr "06 - Devolución de Productos"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "07 - Product Omission"
+msgstr "07 - Omisión de Productos"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "08 - NCF Sequence Errors"
+msgstr "08 - Errores en Secuencia de NCF"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "09 - Due to Operations Cessation"
+msgstr "09 - Por Cese de Operaciones"
+
+#. module: l10n_do_ncf
+#: selection:account.invoice.cancel,annulation_type:0
+msgid "10 - Loss or Theft of Checkbooks"
+msgstr "10 - Pérdida o Hurto de Talonarios"

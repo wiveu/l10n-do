@@ -6,7 +6,7 @@
     <record id="res_partner_demo_1" model="res.partner">
         <field name="name">MARCOS ORGANIZADOR DE NEGOCIOS SRL</field>
         <field eval="1" name="is_company"/>
-        <field name="street">Avenida de Los Próceres</field>
+        <field name="street">Los Proceres Avenue</field>
         <field name="country_id" ref="base.do"/>
         <field name="city">Santo Domingo</field>
         <field name="vat">131098193</field>
