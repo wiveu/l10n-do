@@ -1946,7 +1946,7 @@ class DgiiReport(models.Model):
 
         if self.state == 'generated':
             action = self.env.ref(
-                'dgii_reports.dgii_report_regenerate_wizard_action').read()[0]
+                'l10n_do_dgii_reports.dgii_report_regenerate_wizard_action').read()[0]
             action['context'] = {'default_report_id': self.id}
             return action
         else:
@@ -2012,44 +2012,44 @@ class DgiiReport(models.Model):
     def get_606_tree_view(self):
         return {
             'name': '606',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'res_model': 'dgii.reports.purchase.line',
             'type': 'ir.actions.act_window',
             'view_id':
-                self.env.ref('dgii_reports.dgii_report_purchase_line_tree').id,
+                self.env.ref('l10n_do_dgii_reports.dgii_report_purchase_line_tree').id,
             'domain': [('dgii_report_id', '=', self.id)]
         }
 
     def get_607_tree_view(self):
         return {
             'name': '607',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'res_model': 'dgii.reports.sale.line',
             'type': 'ir.actions.act_window',
             'view_id':
-                self.env.ref('dgii_reports.dgii_report_sale_line_tree').id,
+                self.env.ref('l10n_do_dgii_reports.dgii_report_sale_line_tree').id,
             'domain': [('dgii_report_id', '=', self.id)]
         }
 
     def get_608_tree_view(self):
         return {
             'name': '608',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'res_model': 'dgii.reports.cancel.line',
             'type': 'ir.actions.act_window',
             'view_id':
-                self.env.ref('dgii_reports.dgii_cancel_report_line_tree').id,
+                self.env.ref('l10n_do_dgii_reports.dgii_cancel_report_line_tree').id,
             'domain': [('dgii_report_id', '=', self.id)]
         }
 
     def get_609_tree_view(self):
         return {
             'name': '609',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'res_model': 'dgii.reports.exterior.line',
             'type': 'ir.actions.act_window',
             'view_id':
-                self.env.ref('dgii_reports.dgii_exterior_report_line_tree').id,
+                self.env.ref('l10n_do_dgii_reports.dgii_exterior_report_line_tree').id,
             'domain': [('dgii_report_id', '=', self.id)]
         }
     

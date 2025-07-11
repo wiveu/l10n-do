@@ -13,7 +13,7 @@
                     <field name="state" widget="statusbar" statusbar_visible="active,depleted"/>
                 </header>
                 <sheet>
-                    <field name="can_be_queue" invisible="1"/>
+                    <field name="can_be_queue" invisible="True"/>
                     <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button" name="action_view_sequence" icon="fa-arrow-right" type="object" groups="base.group_system" invisible="not sequence_id">
                             <span class="o_stat_text">Sequence</span>
@@ -32,7 +32,7 @@
                             <field name="expiration_date"/>
                         </group>
                         <group>
-                            <field name="warning_gap" invisible="1"/>
+                            <field name="warning_gap" invisible="True"/>
                             <label string="Remaining warning" for="remaining_percentage"/>
                             <div class="o_row" name="remaining_percentage">
                                 <field name="remaining_percentage"/>
@@ -41,10 +41,10 @@
                             <field name="number_next_actual" groups="base.group_no_one"/>
                             <field name="sequence_remaining" invisible="state in ('draft', 'cancelled')"/>
                             <field name="next_fiscal_number" invisible="state in ('draft', 'cancelled', 'depleted')" />
-                            <field name="type" invisible="1"/>
-                            <field name="sequence_id" invisible="1"/>
+                            <field name="type" invisible="True"/>
+                            <field name="sequence_id" invisible="True"/>
                             <field name="company_id" groups="base.group_multi_company"/>
-                            <field name="company_id" invisible="1"/>
+                            <field name="company_id" invisible="True"/>
                         </group>
                     </group>
                 </sheet>
@@ -124,7 +124,7 @@
                             <field name="name"/>
                             <field name="prefix"/>
                             <field name="type"/>
-                            <field name="journal_type" invisible="1"/>
+                            <field name="journal_type" invisible="True"/>
                             <field name="padding">8</field>
                             <field name="assigned_sequence"/>
                             <field name="requires_document"/>

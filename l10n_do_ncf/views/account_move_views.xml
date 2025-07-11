@@ -8,12 +8,12 @@
 
             <xpath expr="//field[@name='id']" position="after">
                 <!-- Invisible fields -->
-                <field name="fiscal_sequence_status" invisible="1"/>
-                <field name="is_debit_note" invisible="1"/>
-                <field name="is_l10n_do_fiscal_invoice" invisible="1"/>
-                <field name="fiscal_sequence_id" invisible="1"/>
-                <field name="assigned_sequence" invisible="1"/>
-                <field name="available_fiscal_type_ids" invisible="1"/>
+                <field name="fiscal_sequence_status" invisible="True"/>
+                <field name="is_debit_note" invisible="True"/>
+                <field name="is_l10n_do_fiscal_invoice" invisible="True"/>
+                <field name="fiscal_sequence_id" invisible="True"/>
+                <field name="assigned_sequence" invisible="True"/>
+                <field name="available_fiscal_type_ids" invisible="True"/>
             </xpath>
 
             <xpath expr="//form/sheet/div/span" position="after">

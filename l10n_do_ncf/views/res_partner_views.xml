@@ -9,7 +9,7 @@
                 <attribute name="invisible">country_id == %(base.do)s</attribute>
             </xpath>
             <xpath expr="//field[@name='vat']" position="after">
-                <field name="is_fiscal_info_required" invisible="1"/>
+                <field name="is_fiscal_info_required" invisible="True"/>
                 <field name="vat" placeholder="EXP.... NNNNNNNNN or NNNNNNNNNNN" string="RNC / Cedula" 
                     readonly="parent_id"
                     invisible="country_id != %(base.do)s"

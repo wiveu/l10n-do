@@ -8,11 +8,11 @@
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='reason']" position="before">
-                <field name="is_fiscal_refund" invisible="1"/>
+                <field name="is_fiscal_refund" invisible="True"/>
             </xpath>
             
             <xpath expr="//field[@name='reason']" position="after">
-                <field name="is_vendor_refund" invisible="1"/>
+                <field name="is_vendor_refund" invisible="True"/>
                 <field name="refund_ref" 
                     invisible="not is_vendor_refund"
                     required="is_fiscal_refund and is_vendor_refund"/>
@@ -31,8 +31,8 @@
             <form string="Debit Note">
                 <group>
                      <group>
-                         <field name="refund_only" invisible="1"/>
-                         <field name="is_fiscal_refund" invisible="1"/>
+                         <field name="refund_only" invisible="True"/>
+                         <field name="is_fiscal_refund" invisible="True"/>
                      </group>
                      <group>
                          <div attrs="{'invisible':[('refund_method','!=','draft_refund')]}" class="oe_grey" colspan="4">
@@ -47,7 +47,7 @@
                      </group>
                      <group>
                          <field name="description"/>
-                         <field name="is_vendor_refund" invisible="1"/>
+                         <field name="is_vendor_refund" invisible="True"/>
                          <field name="refund_ref" string="Debit Note ref"
                                 attrs="{'invisible': [('is_vendor_refund', '=', False)], 'required': [('is_vendor_refund', '=', True), ('is_fiscal_refund', '=', True)]}"/>
                      </group>
