@@ -33,6 +33,81 @@ Principalmente se enfoca en la gestión de los Números de Comprobantes Fiscal (
 - Emisión de Facturas Fiscales desde el **Punto de Venta**
 	- **WIP**: compatibilidad con impresoras fiscales
 
+## 📦 Módulos Incluidos
+
+### [l10n_do_ncf](l10n_do_ncf/) - Contabilidad Fiscal
+**Gestión completa de Números de Comprobantes Fiscales (NCF)**
+- Administración automática de secuencias NCF
+- Validación en tiempo real con DGII
+- Soporte para todos los tipos de NCF (01-17)
+- Integración con módulo de contabilidad
+
+### [l10n_do_dgii_reports](l10n_do_dgii_reports/) - Reportes DGII
+**Generación de reportes fiscales para DGII**
+- Reportes 606, 607, 608, 609, IT-1
+- Exportación en formatos oficiales de DGII
+- Validación de datos fiscales
+- Clasificación automática de transacciones
+
+### [l10n_do_pos](l10n_do_pos/) - Punto de Venta Fiscal
+**Facturación fiscal desde el Punto de Venta**
+- Emisión de NCF en tiempo real
+- Interfaz POS adaptada para requisitos fiscales
+- Soporte para múltiples tipos de pago
+- Integración con impresoras fiscales
+
+### [l10n_do_rnc](l10n_do_rnc/) - Búsqueda por RNC
+**Consulta automática de información empresarial**
+- Búsqueda de razón social por RNC
+- Validación en tiempo real con DGII
+- Auto-completado de información de contactos
+- Soporte para múltiples servicios de consulta
+
+## 🚀 Instalación Rápida
+
+1. **Requisitos previos**:
+   ```bash
+   # Instalar localización base de República Dominicana
+   pip install odoo-addon-l10n-do
+   ```
+
+2. **Instalación de módulos**:
+   - Copiar el repositorio a la carpeta de addons de Odoo
+   - Actualizar lista de aplicaciones
+   - Instalar módulos en el siguiente orden:
+     1. `l10n_do_ncf` (Contabilidad Fiscal)
+     2. `l10n_do_dgii_reports` (Reportes DGII)
+     3. `l10n_do_pos` (POS Fiscal - opcional)
+     4. `l10n_do_rnc` (Búsqueda RNC - opcional)
+
+3. **Configuración inicial**:
+   - Configurar información fiscal de la empresa (RNC)
+   - Establecer secuencias NCF en diarios
+   - Configurar tipos de impuestos dominicanos
+   - Probar integración con servicios DGII
+
+## 📋 Guía de Uso
+
+### Configuración Básica
+1. **Empresa**: Configurar RNC y datos fiscales
+2. **Diarios**: Asignar secuencias NCF apropiadas
+3. **Clientes**: Configurar RNC/Cédula de clientes
+4. **Productos**: Clasificar productos según normativa fiscal
+
+### Operaciones Diarias
+1. **Facturas de Venta**: NCF automático según tipo de cliente
+2. **Facturas de Compra**: Validación de NCF de proveedores
+3. **Punto de Venta**: Emisión fiscal en tiempo real
+4. **Reportes**: Generación mensual de reportes DGII
+
+## 🔍 Validaciones y Cumplimiento
+
+- ✅ Validación de formato NCF
+- ✅ Verificación de secuencias autorizadas
+- ✅ Integración con servicios web DGII
+- ✅ Cumplimiento con normativa 06-18
+- ✅ Soporte para auditorías fiscales
+
 ## Contribuciones
 
 Antes de hacer una contribución al repositorio a través de un PR, les recomendamos pasar por el [historial de commits de Odoo](https://github.com/odoo/odoo/commits/11.0) donde podrán visualizar el esquema el cual seguirá este repositorio.

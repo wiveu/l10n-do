@@ -1,30 +1,116 @@
-<section class="oe_container">
+<section class="oe_container oe_dark">
     <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B;">Search RNC name</h2>
-        <h3 class="oe_slogan">
-            This module searches for the company name by entering a RNC or cedula, if the company is valid.
-        </h3>
+        <h1 class="oe_slogan" style="color:#875A7B;">Search RNC Name</h1>
+        <h2 class="oe_slogan">
+            Automatic Company Information Lookup by RNC - Dominican Republic
+        </h2>
     </div>
 </section>
 
 <section class="oe_container oe_dark">
     <div class="oe_row oe_spaced">
-        <h3 class="oe_slogan">How does it work?</h3>
+        <div class="oe_span12">
+            <h3 class="oe_slogan" style="color:#875A7B;">Overview</h3>
+            <p class="oe_mt32 text-justify">
+                <strong>Search RNC Name</strong> searches for company names by entering a Taxpayer Registration Number (RNC), validating company information through official Dominican Republic services. This module integrates with DGII services to automatically populate partner information, ensuring accurate and up-to-date business data.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h3 class="oe_slogan" style="color:#875A7B;">Key Features</h3>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan" style="color:#875A7B;">One-Click RNC Lookup</h3>
+        <div class="oe_span6">
+            <p class='oe_mt32 text-justify'>
+                Simply enter an RNC number and click the search button to automatically retrieve company information from official DGII databases. The module validates the RNC format, checks for existence, and populates the partner form with accurate business information.
+            </p>
+            <p class='oe_mt32 text-justify'>
+                Real-time lookup eliminates manual data entry errors and ensures you have the most current business information for your customers and suppliers.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class="oe_picture oe_screenshot" src="search_rnc.png" alt="RNC Lookup"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan" style="color:#875A7B;">Automatic Data Population</h3>
+        <div class="oe_span6">
+            <p class='oe_mt32 text-justify'>
+                When a valid RNC is found, the module automatically populates partner information including company name, business status, and available contact details. This eliminates the need for manual data entry and reduces the risk of typos or outdated information.
+            </p>
+            <p class='oe_mt32 text-justify'>
+                The system respects existing data and provides options to review and confirm changes before applying them to the partner record.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class="oe_picture oe_screenshot" src="searched_rnc.png" alt="Automatic Data Population"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan" style="color:#875A7B;">How It Works</h3>
         <div class="oe_span6">
             <p class='oe_mt32 text-justify'>
                 There are two ways to look up the name with the contact's RNC / Cedula:
             </p>
             <ul>
-                <li>Enter the RNC or Cedula in the contact's name field, the system will automatically search for the name in the available DGII database. If it cannot find it, the system will send you an error message indicating that it does not exist or is misspelled. If the user is certain that it exists and the system cannot find it, use the second method.</li>
-                <li>Enter the company's name and RNC / Cedula when creating the contact, the system will look up the contact's RNC/Cedula name and will place the correct name. If it cannot find it, it will simply create the contact in a forced manner.</li>
+                <li><strong>Automatic Search:</strong> Enter the RNC or Cedula in the contact's name field, the system will automatically search for the name in the available DGII database. If it cannot find it, the system will send you an error message indicating that it does not exist or is misspelled.</li>
+                <li><strong>Manual Creation with Validation:</strong> Enter the company's name and RNC / Cedula when creating the contact, the system will look up the contact's RNC/Cedula name and will place the correct name. If it cannot find it, it will simply create the contact in a forced manner.</li>
             </ul>
-            <p>
+            <p class='oe_mt32 text-justify'>
                 If a contact with a valid tax identification number (RNC) or ID already exists, the system will issue a warning to the user, indicating that they cannot create the contact, as this module restricts the creation of contacts with existing RNCs.
             </p>
         </div>
         <div class="oe_span6">
-            <img class="oe_picture oe_screenshot" src="search_rnc.png">
-            <img class="oe_picture oe_screenshot" src="searched_rnc.png">
+            <img class="oe_picture oe_screenshot" src="search_rnc.png" alt="RNC Search Process"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan" style="color:#875A7B;">RNC Validation</h3>
+        <div class="oe_span6">
+            <p class='oe_mt32 text-justify'>
+                Comprehensive RNC validation includes format checking, checksum verification, and status validation with DGII services. The module supports both 9-digit and 11-digit RNC formats and validates against official DGII databases.
+            </p>
+            <p class='oe_mt32 text-justify'>
+                Visual indicators show the validation status and provide clear feedback about RNC validity, helping ensure data quality and compliance.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class="oe_picture oe_screenshot" src="searched_rnc.png" alt="RNC Validation"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan" style="color:#875A7B;">Configuration</h3>
+        <div class="oe_span6">
+            <p class='oe_mt32 text-justify'>
+                Configure RNC lookup services through <i>Settings</i> &gt; <i>General Settings</i> &gt; <i>RNC Service</i>. Select your preferred service provider, configure API credentials if required, and test the connection to ensure proper functionality.
+            </p>
+            <p class='oe_mt32 text-justify'>
+                The module includes comprehensive documentation and setup assistance to help you configure the optimal settings for your organization's needs.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class="oe_picture oe_screenshot" src="search_rnc.png" alt="RNC Configuration"/>
         </div>
     </div>
 </section>
