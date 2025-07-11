@@ -9,17 +9,18 @@ class ResCompany(models.Model):
         help='Check this box if the company is subject to proportionality '
     )
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         """Override to configure DGII taxes when creating Dominican company"""
-        company = super().create(vals)
+        companies = super().create(vals_list)
         
-        # If this is a Dominican company, configure DGII taxes
-        if company.country_id and company.country_id.code == 'DO':
-            try:
-                self.env['account.tax'].with_company(company)._configure_dgii_tax_types()
-            except Exception:
-                # Don't fail company creation if tax configuration fails
-                pass
+        # If any of these are Dominican companies, configure DGII taxes
+        for company in companies:
+            if company.country_id and company.country_id.code == 'DO':
+                try:
+                    self.env['account.tax'].with_company(company)._configure_dgii_tax_types()
+                except Exception:
+                    # Don't fail company creation if tax configuration fails
+                    pass
             
-        return company
+        return companies
