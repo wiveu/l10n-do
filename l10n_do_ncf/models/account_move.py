@@ -402,7 +402,8 @@ class AccountMove(models.Model):
                     [inv.partner_id.parent_id.id if inv.partner_id.parent_id else 0]
 
                 repeated_ncf = self.env["account.move"].search_count([
-                    ("ref", "=", inv.ref), 
+                    ("ref", "=", inv.ref),
+                    ("ref", "!=", False), 
                     ('id', '!=', inv.id),
                     ('partner_id', 'in', fiscal_partner_ids),
                     ('state', '=', 'posted'),

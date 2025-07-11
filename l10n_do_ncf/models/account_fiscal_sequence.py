@@ -32,7 +32,7 @@ class AccountFiscalSequence(models.Model):
     name = fields.Char(
         string="Authorization number",
         required=True,
-        tracking=True,
+        tracking=True
     )
     expiration_date = fields.Date(
         string="Expiration Date",
@@ -366,7 +366,7 @@ class AccountFiscalType(models.Model):
     name = fields.Char(
         string="Name",
         required=True,
-        copy=False,
+        copy=False
     )
     active = fields.Boolean(
         string="Active",

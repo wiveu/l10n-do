@@ -13,18 +13,18 @@ class AccountMoveCancel(models.TransientModel):
     _name = "account.move.cancel"
     _description = "Cancel the Selected Invoice"
 
-    annulation_type = fields.Selection(
-        [("01", "01 - Pre-printed Invoice Deterioration"),
-         ("02", "02 - Printing Errors (Pre-printed Invoice)"),
-         ("03", "03 - Defective Printing"),
-         ("04", "04 - Information Correction"),
-         ("05", "05 - Product Change"),
-         ("06", "06 - Product Return"),
-         ("07", "07 - Product Omission"),
-         ("08", "08 - NCF Sequence Errors"),
-         ("09", "09 - Due to Operations Cessation"),
-         ("10", "10 - Loss or Theft of Checkbooks"),
-         ],
+    annulation_type = fields.Selection([
+            ("01", "01 - Pre-printed Invoice Deterioration"),
+            ("02", "02 - Printing Errors (Pre-printed Invoice)"),
+            ("03", "03 - Defective Printing"),
+            ("04", "04 - Information Correction"),
+            ("05", "05 - Product Change"),
+            ("06", "06 - Product Return"),
+            ("07", "07 - Product Omission"),
+            ("08", "08 - NCF Sequence Errors"),
+            ("09", "09 - Due to Operations Cessation"),
+            ("10", "10 - Loss or Theft of Checkbooks"),
+        ],
         required=True,
         default=lambda self: self._context.get('annulation_type', '04'))
 

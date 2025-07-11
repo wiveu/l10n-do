@@ -7,23 +7,15 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_confirm" string="Confirm" type="object"
-                            class="oe_highlight"
-                            invisible="state != 'draft'"/>
-                    <button name="action_queue" string="Queue" type="object"
-                            invisible="state != 'draft' or not can_be_queue"/>
-                    <button name="action_cancel" string="Cancel" type="object"
-                            invisible="state in ('cancelled', 'draft')"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_queue" string="Queue" type="object" invisible="state != 'draft' or not can_be_queue"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state in ('cancelled', 'draft')"/>
                     <field name="state" widget="statusbar" statusbar_visible="active,depleted"/>
                 </header>
                 <sheet>
                     <field name="can_be_queue" invisible="1"/>
                     <div class="oe_button_box" name="button_box">
-                        <button class="oe_stat_button"
-                                name="action_view_sequence"
-                                icon="fa-arrow-right" type="object"
-                                groups="base.group_system"
-                                invisible="not sequence_id">
+                        <button class="oe_stat_button" name="action_view_sequence" icon="fa-arrow-right" type="object" groups="base.group_system" invisible="not sequence_id">
                             <span class="o_stat_text">Sequence</span>
                         </button>
                     </div>
@@ -34,29 +26,21 @@
                     </div>
                     <group>
                         <group>
-                            <field name="fiscal_type_id"
-                                   widget="selection"
-                                   domain="[('assigned_sequence', '=', True)]"
-                            />
+                            <field name="fiscal_type_id" widget="selection" domain="[('assigned_sequence', '=', True)]" />
                             <field name="sequence_start"/>
                             <field name="sequence_end"/>
                             <field name="expiration_date"/>
                         </group>
                         <group>
                             <field name="warning_gap" invisible="1"/>
-                            <label string="Remaining warning"
-                                   for="remaining_percentage"/>
+                            <label string="Remaining warning" for="remaining_percentage"/>
                             <div class="o_row" name="remaining_percentage">
                                 <field name="remaining_percentage"/>
                                 <span>%</span>
                             </div>
                             <field name="number_next_actual" groups="base.group_no_one"/>
-                            <field name="sequence_remaining"
-                                   invisible="state in ('draft', 'cancelled')"/>
-                            <field 
-                                name="next_fiscal_number"
-                                invisible="state in ('draft', 'cancelled', 'depleted')"
-                            />
+                            <field name="sequence_remaining" invisible="state in ('draft', 'cancelled')"/>
+                            <field name="next_fiscal_number" invisible="state in ('draft', 'cancelled', 'depleted')" />
                             <field name="type" invisible="1"/>
                             <field name="sequence_id" invisible="1"/>
                             <field name="company_id" groups="base.group_multi_company"/>
@@ -64,11 +48,7 @@
                         </group>
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"
-                           groups="base.group_user"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -96,35 +76,21 @@
             <search>
                 <field name="name"/>
                 <field name="fiscal_type_id"/>
-                <filter name="draft" string="Draft"
-                        domain="[('state','=','draft')]"/>
-                <filter name="active" string="Active"
-                        domain="[('state','in',('active', 'draft'))]"/>
-                <filter name="queue" string="Queue"
-                        domain="[('state','=','queue')]"/>
-                <filter name="depleted" string="Depleted"
-                        domain="[('state','=','depleted')]"/>
-                <filter name="expired" string="Expired"
-                        domain="[('state','=','expired')]"/>
-                <filter name="cancelled" string="Cancelled"
-                        domain="[('state','=','cancelled')]"/>
+                <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="active" string="Active" domain="[('state','in',('active', 'draft'))]"/>
+                <filter name="queue" string="Queue" domain="[('state','=','queue')]"/>
+                <filter name="depleted" string="Depleted" domain="[('state','=','depleted')]"/>
+                <filter name="expired" string="Expired" domain="[('state','=','expired')]"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=','cancelled')]"/>
                 <separator/>
-                <filter name="sale" string="Sale"
-                        domain="[('type','=','sale')]"/>
-                <filter name="purchase" string="Purchase"
-                        domain="[('type','=','purchase')]"/>
-                <filter name="credit_note" string="Credit Note"
-                        domain="[('type','=','credit_note')]"/>
-                <filter name="debit_note" string="Debit Note"
-                        domain="[('type','=','debit_note')]"/>
+                <filter name="sale" string="Sale" domain="[('type','=','sale')]"/>
+                <filter name="purchase" string="Purchase" domain="[('type','=','purchase')]"/>
+                <filter name="credit_note" string="Credit Note" domain="[('type','=','credit_note')]"/>
+                <filter name="debit_note" string="Debit Note" domain="[('type','=','debit_note')]"/>
                 <group expand="0" string="Group By">
-                    <filter name="type" string="Type" domain="[]"
-                            context="{'group_by':'fiscal_type_id'}"/>
-                    <filter name="state" string="State" domain="[]"
-                            context="{'group_by':'state'}"/>
-                    <filter name="company_id" string="Company" domain="[]"
-                            context="{'group_by':'company_id'}"
-                            groups="base.group_multi_company"/>
+                    <filter name="type" string="Type" domain="[]" context="{'group_by':'fiscal_type_id'}"/>
+                    <filter name="state" string="State" domain="[]" context="{'group_by':'state'}"/>
+                    <filter name="company_id" string="Company" domain="[]" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
                 </group>
             </search>
         </field>
@@ -138,7 +104,7 @@
         <field name="search_view_id" ref="account_fiscal_sequence_search"/>
         <field name="context">{'search_default_active': 1}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_empty_folder">
+            <p class="o_view_nocontent_create">
                 No Fiscal Sequence found!
             </p>
             <p>
@@ -165,8 +131,7 @@
                         </group>
                         <group>
                             <field name="active"/>
-                            <field name="journal_id" options="{'no_create': True}"
-                                domain="[('type', '=', journal_type), ('l10n_do_fiscal_journal', '=', True)]"/>
+                            <field name="journal_id" options="{'no_create': True}" domain="[('type', '=', journal_type), ('l10n_do_fiscal_journal', '=', True)]"/>
                             <field name="fiscal_position_id"/>
                         </group>
                     </group>
@@ -196,25 +161,10 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <menuitem
-            id="account_fiscal_sequence_menu_parent"
-            name="Fiscal Dominican Republic"
-            parent="account.menu_finance_configuration"
-    />
+    <menuitem id="account_fiscal_sequence_menu_parent" name="Fiscal Dominican Republic" parent="account.menu_finance_configuration" />
 
-    <menuitem
-            id="account_fiscal_sequence_menu"
-            action="account_fiscal_sequence_action"
-            parent="account_fiscal_sequence_menu_parent"
-            name="Fiscal Sequences"
-    />
+    <menuitem id="account_fiscal_sequence_menu" action="account_fiscal_sequence_action" parent="account_fiscal_sequence_menu_parent" name="Fiscal Sequences" />
 
-    <menuitem
-            id="account_fiscal_type_menu"
-            action="account_fiscal_type_action"
-            parent="account_fiscal_sequence_menu_parent"
-            name="Fiscal Types"
-            groups="base.group_no_one"
-    />
+    <menuitem id="account_fiscal_type_menu" action="account_fiscal_type_action" parent="account_fiscal_sequence_menu_parent" name="Fiscal Types" groups="base.group_no_one" />
 
 </odoo>
