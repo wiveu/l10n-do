@@ -171,7 +171,7 @@ class AccountMoveReversal(models.TransientModel):
     #             }
     #             xml_id = action_map[inv.move_type]
     #     if xml_id:
-    #         result = self.env.ref("l10n_do_accounting.%s" % xml_id).read()[0]
+    #         result = self.env.ref("l10n_do_ncf.%s" % xml_id).read()[0]
     #         invoice_domain = safe_eval(result["domain"])
     #         invoice_domain.append(("id", "in", created_inv))
     #         result["domain"] = invoice_domain

@@ -253,7 +253,7 @@ class AccountFiscalSequence(models.Model):
             "Once you confirm this Fiscal Sequence cannot be edited."
         )
         action = self.sudo().env.ref(
-            "l10n_do_accounting.account_fiscal_sequence_validate_wizard_action"
+            "l10n_do_ncf.account_fiscal_sequence_validate_wizard_action"
         ).read()[0]
         action["context"] = {
             "default_name": msg,
@@ -283,7 +283,7 @@ class AccountFiscalSequence(models.Model):
             "Once you cancel this Fiscal Sequence cannot be used."
         )
         action = self.env.ref(
-            "l10n_do_accounting.account_fiscal_sequence_validate_wizard_action"
+            "l10n_do_ncf.account_fiscal_sequence_validate_wizard_action"
         ).read()[0]
         action["context"] = {
             "default_name": msg,

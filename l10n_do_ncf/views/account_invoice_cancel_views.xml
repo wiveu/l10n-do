@@ -21,7 +21,7 @@
         <field name="name">Cancel Selected Invoice</field>
         <field name="res_model">account.invoice.cancel</field>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="l10n_do_accounting.account_invoice_cancel_view"/>
+        <field name="view_id" ref="l10n_do_ncf.account_invoice_cancel_view"/>
         <field name="target">new</field>
     </record>
 

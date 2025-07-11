@@ -54,14 +54,14 @@
                     <span t-esc="forced_vat"/>
                 </div>
             </div>
-            <t t-call="l10n_do_accounting.fiscal_info"/>
+            <t t-call="l10n_do_ncf.fiscal_info"/>
         </div>
     </template>
 
     <template id="external_layout_standard_inherited" inherit_id="web.external_layout_standard">
         <xpath expr="//div[@name='company_address']" position="after">
             <t t-if="l10n_do_fiscal_invoice">
-                <t t-call="l10n_do_accounting.fiscal_info"/>
+                <t t-call="l10n_do_ncf.fiscal_info"/>
             </t>
         </xpath>
         <xpath expr="//li[@t-if='forced_vat']" position="after">
@@ -98,7 +98,7 @@
         </xpath> 
         <xpath expr="//div[hasclass('o_boxed_header')][1]" position="after">
             <t t-if="l10n_do_fiscal_invoice">
-                <t t-call="l10n_do_accounting.complete_fiscal_info"/>
+                <t t-call="l10n_do_ncf.complete_fiscal_info"/>
             </t>
         </xpath>
     </template>
@@ -121,7 +121,7 @@
         </xpath>
         <xpath expr="//div[hasclass('o_clean_header')]" position="after">
             <t t-if="l10n_do_fiscal_invoice">
-                <t t-call="l10n_do_accounting.complete_fiscal_info"/>
+                <t t-call="l10n_do_ncf.complete_fiscal_info"/>
             </t>
         </xpath>
         <xpath expr="//t[@t-call='web.address_layout']" position="replace">
@@ -155,7 +155,7 @@
         </xpath>
         <xpath expr="//div[hasclass('o_background_header')][1]" position="after">
             <t t-if="l10n_do_fiscal_invoice">
-                <t t-call="l10n_do_accounting.complete_fiscal_info"/>
+                <t t-call="l10n_do_ncf.complete_fiscal_info"/>
             </t>
         </xpath>
         <xpath expr="//t[@t-call='web.address_layout']" position="replace">

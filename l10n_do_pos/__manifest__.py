@@ -9,7 +9,7 @@
     'depends': [
         'base',
         'point_of_sale',
-        'l10n_do_accounting',
+        'l10n_do_ncf',
     ],
     'data': [
         'security/ir.model.access.csv',

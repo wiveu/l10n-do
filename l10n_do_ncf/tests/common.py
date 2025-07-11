@@ -25,14 +25,14 @@ class CommonSetup(TransactionCase):
         self.fiscal_sequence_obj = self.env["account.fiscal.sequence"]
         self.fiscal_type_obj = self.env["account.fiscal.type"]
         self.fiscal_seq_credito_fiscal = self.ref(
-            "l10n_do_accounting.credito_fiscal_demo"
+            "l10n_do_ncf.credito_fiscal_demo"
         )
-        self.fiscal_seq_unico = self.ref("l10n_do_accounting.unico_demo")
+        self.fiscal_seq_unico = self.ref("l10n_do_ncf.unico_demo")
         self.fiscal_type_credito_fiscal = self.ref(
-            "l10n_do_accounting.fiscal_type_credito_fiscal"
+            "l10n_do_ncf.fiscal_type_credito_fiscal"
         )
-        self.fiscal_type_consumo = self.ref("l10n_do_accounting.fiscal_type_consumo")
-        self.fiscal_type_unico = self.ref("l10n_do_accounting.fiscal_type_unico")
+        self.fiscal_type_consumo = self.ref("l10n_do_ncf.fiscal_type_consumo")
+        self.fiscal_type_unico = self.ref("l10n_do_ncf.fiscal_type_unico")
 
 
 class AccountInvoiceCommon(CommonSetup):
@@ -57,33 +57,33 @@ class AccountInvoiceCommon(CommonSetup):
                 self.purchase_journal = journal
 
         # Demo partners
-        self.partner_demo_1 = self.ref("l10n_do_accounting.res_partner_demo_1")
-        self.partner_demo_2 = self.ref("l10n_do_accounting.res_partner_demo_2")
-        self.partner_demo_3 = self.ref("l10n_do_accounting.res_partner_demo_3")
-        self.partner_demo_4 = self.ref("l10n_do_accounting.res_partner_demo_4")
-        self.partner_demo_5 = self.ref("l10n_do_accounting.res_partner_demo_5")
+        self.partner_demo_1 = self.ref("l10n_do_ncf.res_partner_demo_1")
+        self.partner_demo_2 = self.ref("l10n_do_ncf.res_partner_demo_2")
+        self.partner_demo_3 = self.ref("l10n_do_ncf.res_partner_demo_3")
+        self.partner_demo_4 = self.ref("l10n_do_ncf.res_partner_demo_4")
+        self.partner_demo_5 = self.ref("l10n_do_ncf.res_partner_demo_5")
 
         # Demo fiscal sequence
-        self.seq_fiscal = self.ref("l10n_do_accounting.credito_fiscal_demo")
-        self.seq_consumo = self.ref("l10n_do_accounting.consumo_demo")
-        self.seq_unico = self.ref("l10n_do_accounting.unico_demo")
-        self.seq_informal = self.ref("l10n_do_accounting.informal_demo")
-        self.seq_credit_note = self.ref("l10n_do_accounting.cn_demo")
-        self.seq_debit_note = self.ref("l10n_do_accounting.dn_demo")
+        self.seq_fiscal = self.ref("l10n_do_ncf.credito_fiscal_demo")
+        self.seq_consumo = self.ref("l10n_do_ncf.consumo_demo")
+        self.seq_unico = self.ref("l10n_do_ncf.unico_demo")
+        self.seq_informal = self.ref("l10n_do_ncf.informal_demo")
+        self.seq_credit_note = self.ref("l10n_do_ncf.cn_demo")
+        self.seq_debit_note = self.ref("l10n_do_ncf.dn_demo")
 
         # Demo fiscal type
         self.fiscal_type_fiscal = self.ref(
-            "l10n_do_accounting.fiscal_type_credito_fiscal"
+            "l10n_do_ncf.fiscal_type_credito_fiscal"
         )
-        self.fiscal_type_consumo = self.ref("l10n_do_accounting.fiscal_type_consumo")
-        self.fiscal_type_informal = self.ref("l10n_do_accounting.fiscal_type_informal")
-        self.fiscal_type_cn = self.ref("l10n_do_accounting.fiscal_type_credit_note")
+        self.fiscal_type_consumo = self.ref("l10n_do_ncf.fiscal_type_consumo")
+        self.fiscal_type_informal = self.ref("l10n_do_ncf.fiscal_type_informal")
+        self.fiscal_type_cn = self.ref("l10n_do_ncf.fiscal_type_credit_note")
         self.fiscal_type_cn_purchase = self.ref(
-            "l10n_do_accounting.fiscal_type_purchase_credit_note"
+            "l10n_do_ncf.fiscal_type_purchase_credit_note"
         )
-        self.fiscal_type_dn = self.ref("l10n_do_accounting.fiscal_type_debit_note")
+        self.fiscal_type_dn = self.ref("l10n_do_ncf.fiscal_type_debit_note")
         self.fiscal_type_dn_purchase = self.ref(
-            "l10n_do_accounting.fiscal_type_purchase_debit_note"
+            "l10n_do_ncf.fiscal_type_purchase_debit_note"
         )
 
         # Invoice lines

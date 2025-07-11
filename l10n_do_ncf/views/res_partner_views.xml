@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="l10n_do_accounting_view_partner_form" model="ir.ui.view">
+    <record id="l10n_do_ncf_view_partner_form" model="ir.ui.view">
         <field name="name">l10n.do.accounting.view.partner.form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>

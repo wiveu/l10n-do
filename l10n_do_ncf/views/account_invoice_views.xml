@@ -34,7 +34,7 @@
             </xpath>
 
             <xpath expr="//button[@name='action_reverse']" position="attributes">
-                <attribute name="groups">l10n_do_accounting.credit_note_group</attribute>
+                <attribute name="groups">l10n_do_ncf.credit_note_group</attribute>
             </xpath>
 
             <xpath expr="//form/sheet/group/group[@id='header_left_group']/label[@for='ref']" position="attributes">
@@ -198,7 +198,7 @@
     </record>
 
 
-    <record id="l10n_do_accounting_invoice_form_cancel_inherit" model="ir.ui.view">
+    <record id="l10n_do_ncf_invoice_form_cancel_inherit" model="ir.ui.view">
             <field name="name">invoice.form.cancel.inherit</field>
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>

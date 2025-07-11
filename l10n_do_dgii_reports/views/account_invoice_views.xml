@@ -73,10 +73,10 @@
         </field>
     </record>
 
-    <record id="l10n_do_accounting_view_move_form_inherit" model="ir.ui.view">
+    <record id="l10n_do_ncf_view_move_form_inherit" model="ir.ui.view">
         <field name="name">l10n.do.accounting.view.move.form.inherit</field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="l10n_do_accounting.view_move_form_inherit"/>
+        <field name="inherit_id" ref="l10n_do_ncf.view_move_form_inherit"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='expense_type']" position="after">
                 <field name="is_exterior" invisible="1"/>

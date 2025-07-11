@@ -8,7 +8,7 @@
     'name': "Declaraciones DGII",
 
     'summary': """
-        Este módulo extiende las funcionalidades del l10n_do_accounting,
+        Este módulo extiende las funcionalidades del l10n_do_ncf,
         integrando los reportes de declaraciones fiscales""",
 
     'author': "Indexa, SRL, Iterativo SRL",
@@ -20,7 +20,7 @@
         'web',
         'account',
         'l10n_do',
-        'l10n_do_accounting'
+        'l10n_do_ncf'
     ],
 
     # always loaded

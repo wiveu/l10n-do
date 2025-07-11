@@ -18,7 +18,7 @@
         'base',
         'contacts',
         'l10n_do',
-        'l10n_do_accounting',
+        'l10n_do_ncf',
         'base_vat'
     ],
     "data": [

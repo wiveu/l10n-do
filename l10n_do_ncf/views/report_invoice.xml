@@ -44,7 +44,7 @@
                 <div class="row pt-2">
                     <t t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)">
                         <div class="col-6" name="fiscal_address_not_same_as_shipping">
-                            <t t-call="l10n_do_accounting.receiver_fiscal_info"/>
+                            <t t-call="l10n_do_ncf.receiver_fiscal_info"/>
                         </div>
                         <div class="col-6">
                             <div groups="account.group_delivery_invoice_address">
@@ -55,12 +55,12 @@
                     </t>
                     <t t-elif="o.partner_shipping_id and (o.partner_shipping_id == o.partner_id)">
                         <div class="col-6" name="fiscal_address_same_as_shipping">
-                            <t t-call="l10n_do_accounting.receiver_fiscal_info"/>
+                            <t t-call="l10n_do_ncf.receiver_fiscal_info"/>
                         </div>
                     </t>
                     <t t-else="">
                         <div class="col-6" name="fiscal_no_shipping">
-                            <t t-call="l10n_do_accounting.receiver_fiscal_info"/>
+                            <t t-call="l10n_do_ncf.receiver_fiscal_info"/>
                         </div>
                     </t>
                 </div>

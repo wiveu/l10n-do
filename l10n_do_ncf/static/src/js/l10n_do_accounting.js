@@ -1,4 +1,4 @@
-odoo.define('l10n_do_accounting.l10n_do_accounting', function (require) {
+odoo.define('l10n_do_ncf.l10n_do_ncf', function (require) {
     "use strict";
 
     var basicFields = require('web.basic_fields');
