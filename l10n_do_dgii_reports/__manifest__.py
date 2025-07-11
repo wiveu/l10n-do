@@ -44,8 +44,8 @@
 
     'assets':{
         'web.assets_backend': [
-            '/dgii_reports/static/src/scss/dgii_reports.scss',
-            '/dgii_reports/static/src/js/widget.js',
+            '/l10n_do_dgii_reports/static/src/scss/dgii_reports.scss',
+            '/l10n_do_dgii_reports/static/src/js/widget.js',
         ]
     },
 
