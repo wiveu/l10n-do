@@ -6,6 +6,12 @@
 from odoo import models, api, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons.base_vat.models.res_partner import _ref_vat
+_lt = LazyTranslate(__name__)
+
+if _ref_vat:
+    _ref_vat.update({
+        'do': _lt("Example: '22400504056' or '133195593' (format: 9 digits for RNC or 11 Digits for Cedula, all numbers.)"),
+    })
 
 import logging
 import re
@@ -21,21 +27,6 @@ except (ImportError, IOError) as err:
 
 class Partner(models.Model):
     _inherit = 'res.partner'
-    
-    @api.model
-    def _get_vat_ref_dict(self):
-        """Update VAT reference dictionary with Dominican format"""
-        if _ref_vat and 'do' not in _ref_vat:
-            _ref_vat.update({
-                'do': _("Example: '22400504056' or '133195593' (format: 9 digits for RNC or 11 Digits for Cedula, all numbers.)"),
-            })
-        return _ref_vat
-    
-    @api.model_create_multi 
-    def create(self, vals_list):
-        # Ensure VAT reference is initialized
-        self._get_vat_ref_dict()
-        return super().create(vals_list)
     
     def check_vat_do(self, vat):
         return rnc.is_valid(vat) or cedula.is_valid(vat)
