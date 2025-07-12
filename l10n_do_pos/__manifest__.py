@@ -1,15 +1,15 @@
 {
     'name': "Fiscal POS (Rep. Dominicana)",
-    'summary': """Incorpora funcionalidades de facturación con NCF al POS.""",
-    'author': "Guavana, Indexa, Iterativo SRL",
+    'summary': """Incorporates NCF billing functionalities to POS.""",
+    'author': "Guavana, Indexa, Iterativo SRL, Neotec, Jenrax SRL",
     'license': 'LGPL-3',
-    'website': "https://github.com/odoo-dominicana",
+    'website': "https://github.com/Jenrax-git/l10n-do",
     'category': 'Localization',
-    'version': '16.0.2.3.7',
+    'version': '18.0.2.3.7',
     'depends': [
         'base',
         'point_of_sale',
-        'l10n_do_accounting',
+        'l10n_do_ncf',
     ],
     'data': [
         'security/ir.model.access.csv',

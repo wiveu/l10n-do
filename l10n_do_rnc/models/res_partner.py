@@ -9,7 +9,7 @@ from odoo.addons.base_vat.models.res_partner import _ref_vat
 
 if _ref_vat:
     _ref_vat.update({
-        'do': _("Example: '22400504056' or '133195593' (format: 9 digits for RNC or 11 Digits for Cedula, all numbers.)"),
+        'do': "Example: '22400504056' or '133195593' (format: 9 digits for RNC or 11 Digits for Cedula, all numbers.)",
     })
 
 import logging

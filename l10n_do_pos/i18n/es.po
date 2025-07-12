@@ -1,0 +1,23 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_do_pos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_do_pos
+#: model:res.partner,name:l10n_do_pos.default_pos_partner
+msgid "Final Consumer"
+msgstr "Cliente de consumo"
+
+#. module: l10n_do_pos
+#: model:pos.payment.method,name:l10n_do_pos.credit_note
+msgid "Credit Note"
+msgstr "Nota de Crédito"
