@@ -1,22 +1,25 @@
-odoo.define('dgii_report.dgii_report_widget', function (require) {
-    "use strict";
+/** @odoo-module **/
 
-    var field_registry = require('web.field_registry');
-    var basic_fields = require('web.basic_fields');
+import { registry } from "@web/core/registry";
+import { CharField } from "@web/views/fields/char/char_field";
+import { Component, markup } from "@odoo/owl";
 
-    var UrlDgiiReportsWidget = basic_fields.UrlWidget.extend({
-        _renderReadonly: function () {
-            this.$el.text(this.attrs.text || this.value)
-                .addClass('o_form_uri o_text_overflow')
-                .attr('target', '_blank')
-                .attr('href', "dgii_reports/"+this.value);
-        },
-    });
+export class UrlDgiiReportsWidget extends CharField {
+    
+    get displayedValue() {
+        const value = this.props.record.data[this.props.name];
+        if (!value) {
+            return "";
+        }
+        
+        if (this.props.readonly) {
+            const href = `dgii_reports/${value}`;
+            const linkHtml = `<a href="${href}" target="_blank" class="o_form_uri o_text_overflow">${value}</a>`;
+            return markup(linkHtml);
+        }
+        
+        return value;
+    }
+}
 
-    field_registry.add('dgii_reports_url', UrlDgiiReportsWidget);
-
-    return {
-        UrlDgiiReportsWidget: UrlDgiiReportsWidget,
-    };
-
-});
+registry.category("fields").add("dgii_reports_url", UrlDgiiReportsWidget);

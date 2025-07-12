@@ -26,5 +26,5 @@
             'l10n_do_pos/static/src/xml/**/*.xml',
         ],
     },
-    'installable': True,
+    'installable': False,
 }

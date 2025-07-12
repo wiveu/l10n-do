@@ -14,7 +14,7 @@
     'author': "Indexa, SRL, Iterativo SRL, Jenrax SRL, Neotec",
     'license': 'LGPL-3',
     "category": "Localization",
-    'version': '18.0.1.4.9',
+    'version': '18.0.1.5.1',
     'website': "https://github.com/Jenrax-git/l10n-do",
     # any module necessary for this one to work correctly
     'depends': [
@@ -44,8 +44,9 @@
 
     'assets':{
         'web.assets_backend': [
-            'l10n_do_dgii_reports/static/src/scss/dgii_reports.scss',
-            'l10n_do_dgii_reports/static/src/js/widget.js',
+            # TODO: This not working repair and here for repair
+            # 'l10n_do_dgii_reports/static/src/scss/dgii_reports.scss',
+            # 'l10n_do_dgii_reports/static/src/js/widget.js',
         ]
     },
 
