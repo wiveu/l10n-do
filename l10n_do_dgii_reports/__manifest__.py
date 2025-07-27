@@ -14,6 +14,7 @@
     'author': "Indexa, SRL, Iterativo SRL, Jenrax SRL, Neotec",
     'license': 'LGPL-3',
     "category": "Localization",
+    'countries': ['do'],
     'version': '18.0.1.5.1',
     'website': "https://github.com/Jenrax-git/l10n-do",
     # any module necessary for this one to work correctly
@@ -23,7 +24,6 @@
         'l10n_do',
         'l10n_do_ncf'
     ],
-
     # always loaded
     'data': [
         'data/invoice_service_type_detail_data.xml',

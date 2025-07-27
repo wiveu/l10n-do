@@ -5,6 +5,7 @@
     'license': 'LGPL-3',
     'website': "https://github.com/Jenrax-git/l10n-do",
     'category': 'Localization',
+    'countries': ['do'],
     'version': '18.0.2.3.7',
     'depends': [
         'base',
