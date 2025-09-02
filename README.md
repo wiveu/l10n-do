@@ -23,15 +23,10 @@ Principalmente se enfoca en la gestión de los Números de Comprobantes Fiscal (
 	- Estructura correcta del NCF digitado
 	- Validación de relación **NCF-RNC** con WebService de DGII
 
-- Consulta de **tasas de banco** en tiempo real
-	- Actualización diaria de tasa USD desde el Banco Central
-	- Importador de Archivo de Tasas del Banco Central para generación de histórico
-
 - Creación de contactos por **RNC** o **Cédula**
 	- Consulta con el WebService de DGII
 
 - Emisión de Facturas Fiscales desde el **Punto de Venta**
-	- **WIP**: compatibilidad con impresoras fiscales
 
 ## 📦 Módulos Incluidos
 
@@ -65,13 +60,8 @@ Principalmente se enfoca en la gestión de los Números de Comprobantes Fiscal (
 
 ## 🚀 Instalación Rápida
 
-1. **Requisitos previos**:
-   ```bash
-   # Instalar localización base de República Dominicana
-   pip install odoo-addon-l10n-do
-   ```
 
-2. **Instalación de módulos**:
+1. **Instalación de módulos**:
    - Copiar el repositorio a la carpeta de addons de Odoo
    - Actualizar lista de aplicaciones
    - Instalar módulos en el siguiente orden:
@@ -80,7 +70,7 @@ Principalmente se enfoca en la gestión de los Números de Comprobantes Fiscal (
      3. `l10n_do_pos` (POS Fiscal - opcional)
      4. `l10n_do_rnc` (Búsqueda RNC - opcional)
 
-3. **Configuración inicial**:
+2. **Configuración inicial**:
    - Configurar información fiscal de la empresa (RNC)
    - Establecer secuencias NCF en diarios
    - Configurar tipos de impuestos dominicanos
@@ -115,3 +105,5 @@ Antes de hacer una contribución al repositorio a través de un PR, les recomend
 También, antes de cualquier publicación deben leer la [guía de Contribución de OCA](https://github.com/OCA/odoo-community.org/blob/master/website/Contribution/CONTRIBUTING.rst) que es la base de nuestras políticas de contribución.
 
 > Antes de poder hacer una contribución, si es la primera que realizas, debes crear un **issue** explicando el problema e indicando que harás un **PR**.
+>
+> 
