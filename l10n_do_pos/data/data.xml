@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record model="res.partner" id="default_pos_partner" forcecreate="0">
-            <field name="name">Final Consumer</field>
+        <!-- Default partner for POS orders without customer -->
+        <record model="res.partner" id="default_pos_partner">
+            <field name="name">Consumidor Final</field>
+            <field name="is_company">False</field>
         </record>
 
-        <record model="pos.config" id="point_of_sale.pos_config_main">
-            <field name="pos_partner_id" ref="default_pos_partner"/>
-        </record>
-
+        <!-- Credit Note payment method -->
         <record model="pos.payment.method" id="credit_note">
-            <field name="name">Credit Note</field>
+            <field name="name">Nota de Credito</field>
             <field name="split_transactions">True</field>
             <field name="is_credit_note">True</field>
         </record>
 
-        <record model="pos.config" id="point_of_sale.pos_config_main">
-            <field name="payment_method_ids" eval="[(4, ref('credit_note'))]"/>
-        </record>
+        <!--
+        Note: pos_config_main records removed because they reference demo data
+        that may not exist in production. Configure POS manually:
+        1. Go to POS > Configuration > Point of Sale
+        2. Set Default Partner to "Consumidor Final"
+        3. Add "Credit Note" payment method
+        -->
     </data>
 </odoo>
