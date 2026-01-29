@@ -58,6 +58,13 @@ msgstr "Tipo de Cuenta Fiscal"
 #. odoo-javascript
 #: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
 #, python-format
+msgid "Affected NCF:"
+msgstr "NCF Afectado:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
 msgid "Affect:"
 msgstr "Afecta a:"
 
@@ -163,6 +170,13 @@ msgstr "No se encuentra la nota de crédito"
 #, python-format
 msgid "Customer:"
 msgstr "Cliente:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Date:"
+msgstr "Fecha:"
 
 #. module: l10n_do_pos
 #. odoo-javascript
@@ -797,6 +811,34 @@ msgstr "No se pueden guardar los cambios."
 #, python-format
 msgid "VALUE"
 msgstr "VALOR"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Valid until:"
+msgstr "Válido hasta:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Valid for fiscal credit"
+msgstr "Válido para crédito fiscal"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Thank you for your purchase!"
+msgstr "¡Gracias por su compra!"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Powered by Wiveu"
+msgstr "Con la tecnología de Wiveu"
 
 #. module: l10n_do_pos
 #. odoo-python

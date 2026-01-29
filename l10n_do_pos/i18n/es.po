@@ -21,3 +21,94 @@ msgstr "Cliente de consumo"
 #: model:pos.payment.method,name:l10n_do_pos.credit_note
 msgid "Credit Note"
 msgstr "Nota de Crédito"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Customer:"
+msgstr "Cliente:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "RNC / Cedula:"
+msgstr "RNC / Cédula:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Authorized by DGII"
+msgstr "Autorizado por DGII"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Date:"
+msgstr "Fecha:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "NCF:"
+msgstr "NCF:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Valid until:"
+msgstr "Válido hasta:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Affected NCF:"
+msgstr "NCF Afectado:"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Valid for fiscal credit"
+msgstr "Válido para crédito fiscal"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "DESCRIPTION"
+msgstr "DESCRIPCIÓN"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "ITBIS"
+msgstr "ITBIS"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "VALUE"
+msgstr "VALOR"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Thank you for your purchase!"
+msgstr "¡Gracias por su compra!"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/xml/OrderReceipt.xml:0
+#, python-format
+msgid "Powered by Wiveu"
+msgstr "Con la tecnología de Wiveu"

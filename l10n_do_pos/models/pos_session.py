@@ -18,6 +18,8 @@ class PosSession(models.Model):
             data.update({
                 'payment_method_to_receivable_lines': {},
                 'payment_to_receivable_lines': {},
+                # Keys expected by pos_online_payment module
+                'online_payment_to_receivable_lines': {},
             })
             return data
         return super(PosSession, self)._create_bank_payment_moves(data)

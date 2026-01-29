@@ -21,11 +21,12 @@
         'views/pos_payment_method_views.xml',
     ],
     'assets': {
-        'point_of_sale.assets': [
+        'point_of_sale._assets_pos': [
             'l10n_do_pos/static/src/scss/*',
-            'l10n_do_pos/static/src/js/**/*.js',
-            'l10n_do_pos/static/src/xml/**/*.xml',
+            'l10n_do_pos/static/src/js/*.js',
+            'l10n_do_pos/static/src/overrides/**/*.js',
+            'l10n_do_pos/static/src/xml/*.xml',
         ],
     },
-    'installable': False,
+    'installable': True,
 }
