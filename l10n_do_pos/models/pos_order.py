@@ -245,13 +245,18 @@ class PosOrder(models.Model):
         pos_config = self.env['pos.config'].browse(config_id)
         
         if pos_config.invoice_journal_id.l10n_do_fiscal_journal:
-            config_ids = self.env['pos.config'].search([('invoice_journal_id.l10n_do_fiscal_journal', '=', True)]).ids 
+            electronic = getattr(pos_config, 'l10n_do_ecf_enabled', False)
+            config_domain = [('invoice_journal_id.l10n_do_fiscal_journal', '=', True)]
+            if electronic:
+                config_domain += [('l10n_do_ecf_enabled', '=', True),
+                                  ('company_id', '=', pos_config.company_id.id)]
+            config_ids = self.env['pos.config'].search(config_domain).ids
 
             default_domain = [
                 '&', '&', '&',
                 ('config_id', 'in', config_ids), 
                 ('ncf', '!=', False),
-                ('amount_total', '>', 0),
+                ('amount_total', '!=', 0) if electronic else ('amount_total', '>', 0),
                 '!', '|', 
                 ('state', '=', 'draft'), 
                 ('state', '=', 'cancelled')
