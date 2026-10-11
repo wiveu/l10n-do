@@ -8,7 +8,7 @@ import { AlertDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
 patch(TicketScreen.prototype, {
     // Override refund handling for fiscal compliance
     async onDoRefund() {
-        if (!this.pos.config.l10n_do_fiscal_journal) {
+        if (!this.pos.config.l10n_do_fiscal_journal || this.pos.config.l10n_do_ecf_enabled) {
             return super.onDoRefund(...arguments);
         }
 
