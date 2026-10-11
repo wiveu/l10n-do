@@ -6,4 +6,29 @@
         <field eval="True" name="global"/>
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
+    <record id="dgii_reports_purchase_line_rule" model="ir.rule">
+        <field name="name">DGII purchase lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_purchase_line"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="dgii_reports_sale_line_rule" model="ir.rule">
+        <field name="name">DGII sale lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_sale_line"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="dgii_reports_cancel_line_rule" model="ir.rule">
+        <field name="name">DGII cancellation lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_cancel_line"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="dgii_reports_exterior_line_rule" model="ir.rule">
+        <field name="name">DGII exterior lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_exterior_line"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="dgii_reports_it1_line_rule" model="ir.rule">
+        <field name="name">DGII IT-1 lines multi-company</field>
+        <field name="model_id" ref="model_dgii_reports_it1_line"/>
+        <field name="domain_force">[('dgii_report_id.company_id', 'in', company_ids)]</field>
+    </record>
 </odoo>
