@@ -48,6 +48,7 @@ class AccountMove(models.Model):
         'line_ids', 
         'line_ids.balance', 
         'line_ids.tax_line_id',
+        'line_ids.tax_line_id.l10n_do_tax_type',
         'l10n_do_is_subject_to_proportionality'
     )
     def _compute_taxes_fields(self):
@@ -99,7 +100,8 @@ class AccountMove(models.Model):
         'payment_state',
         'line_ids', 
         'line_ids.balance', 
-        'line_ids.tax_line_id'
+        'line_ids.tax_line_id',
+        'line_ids.tax_line_id.l10n_do_tax_type',
     )
     def _compute_withholding_taxes(self):
         # Withholdings
@@ -152,7 +154,9 @@ class AccountMove(models.Model):
     @api.depends(
         'state',
         'invoice_line_ids', 
-        'invoice_line_ids.product_id', 
+        'invoice_line_ids.product_id',
+        'line_ids.tax_line_id.l10n_do_tax_type',
+        'line_ids.tax_line_id.isr_retention_type',
     )
     def _compute_isr_withholding_type(self):
         """Compute ISR Withholding Type
