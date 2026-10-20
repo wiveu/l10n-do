@@ -1975,8 +1975,8 @@ class DgiiReport(models.Model):
                 _('There are reports that have not been sent yet. Please send them before generating a new one.'))
 
         if self.state == 'generated':
-            action = self.env.ref(
-                'l10n_do_dgii_reports.dgii_report_regenerate_wizard_action').read()[0]
+            action = self.env['ir.actions.actions']._for_xml_id(
+                'l10n_do_dgii_reports.dgii_report_regenerate_wizard_action')
             action['context'] = {'default_report_id': self.id}
             return action
         else:
