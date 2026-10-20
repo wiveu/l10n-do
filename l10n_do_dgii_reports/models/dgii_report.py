@@ -88,8 +88,11 @@ class DgiiReport(models.Model):
             start_date = False
             end_date = False
             
-            if report.name:
-                month, year = report.name.split('/')
+            if report.name and '/' in report.name:
+                parts = report.name.split('/')
+                if len(parts) != 2:
+                    continue
+                month, year = parts
                 last_day = calendar.monthrange(int(year), int(month))[1]
                 start_date = '{}-{}-01'.format(year, month)
                 end_date = '{}-{}-{}'.format(year, month, last_day)
