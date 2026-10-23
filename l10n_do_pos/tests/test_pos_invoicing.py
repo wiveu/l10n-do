@@ -14,6 +14,14 @@ from odoo.tests.common import new_test_user
 @tagged('post_install', '-at_install')
 class TestFiscalPosInvoicing(AccountTestInvoicingCommon):
     @classmethod
+    def setup_independent_user(cls):
+        user = super().setup_independent_user()
+        if user.env.ref('wiveu_admin.group_wiveu_admin', raise_if_not_found=False):
+            from odoo.addons.wiveu_admin.tests.common import prepare_wiveu_admin
+            return prepare_wiveu_admin(user)
+        return user
+
+    @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env.user.groups_id |= cls.env.ref('point_of_sale.group_pos_manager')
