@@ -1,5 +1,8 @@
+import json
+
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
+from odoo.tools import SQL
 from odoo.osv.expression import AND
 from datetime import timedelta
 
@@ -122,18 +125,35 @@ class PosOrder(models.Model):
     #     return super(PosOrder, self)._process_order(pos_order)
 
     def _process_saved_order(self, draft):
-        result = super()._process_saved_order(draft)
-        if (not draft and self.state == 'paid' and self.ncf and self.amount_total
-                and self.config_id.invoice_journal_id.l10n_do_fiscal_journal):
+        fiscal = (not draft and self.state != 'cancel' and self.amount_total
+                  and self.config_id.invoice_journal_id.l10n_do_fiscal_journal)
+        if fiscal:
             if not self.partner_id:
                 self.partner_id = self.config_id.pos_partner_id
             if not self.partner_id:
                 raise UserError(_('This point of sale not have default customer, please set default customer in config POS'))
+            if not self.ncf:
+                if not self.uuid:
+                    raise UserError(_('A fiscal sale requires a stable order identifier. Reload the POS.'))
+                if not self.fiscal_type_id or not self.fiscal_type_id.assigned_sequence:
+                    raise UserError(_('Select a fiscal type before completing this sale.'))
+                reservation = self._get_next_fiscal_sequence(
+                    self.fiscal_type_id.id, self.company_id.id, [],
+                    json.dumps({'uuid': self.uuid, 'session_id': self.session_id.id}))
+                self.write({key: reservation[key] for key in
+                            ('ncf', 'fiscal_sequence_id', 'ncf_expiration_date')})
+        result = super()._process_saved_order(draft)
+        if fiscal and self.state == 'paid':
             self._generate_pos_order_invoice()
+        if fiscal and (self.state != 'invoiced' or self.account_move.state != 'posted'):
+            raise UserError(_('The fiscal sale could not be invoiced. Retry the same order.'))
         return result
 
 
-    def get_next_fiscal_sequence(
+    def get_next_fiscal_sequence(self, fiscal_type_id, company_id, payments, order_json):
+        raise UserError(_('Reload the POS. Fiscal numbers are assigned when the sale is saved.'))
+
+    def _get_next_fiscal_sequence(
             self, 
             fiscal_type_id,
             company_id, 
@@ -161,7 +181,11 @@ class PosOrder(models.Model):
                     fiscal_type.name,
             ))
 
-        new_ncf = fiscal_sequence.get_fiscal_number()
+        # Allocation, order and invoice must commit or roll back together.
+        fiscal_sequence.flush_recordset()
+        self.env.cr.execute(SQL('SELECT id FROM account_fiscal_sequence WHERE id = %s FOR UPDATE', fiscal_sequence.id))
+        fiscal_sequence.invalidate_recordset()
+        new_ncf = fiscal_sequence.sudo().get_fiscal_number()
         
         # This is the better way to identify problems with fiscal sequences 
         ncf_log = self.env['pos.order.ncf.log'].sudo().create({

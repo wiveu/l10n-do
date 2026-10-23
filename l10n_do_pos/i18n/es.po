@@ -112,3 +112,35 @@ msgstr "¡Gracias por su compra!"
 #, python-format
 msgid "Powered by Wiveu"
 msgstr "Con la tecnología de Wiveu"
+
+#. module: l10n_do_pos
+#: code:addons/l10n_do_pos/models/pos_order.py:0
+msgid "A fiscal sale requires a stable order identifier. Reload the POS."
+msgstr "La venta fiscal requiere un identificador de orden estable. Recargue el POS."
+
+#. module: l10n_do_pos
+#: code:addons/l10n_do_pos/models/pos_order.py:0
+msgid "Select a fiscal type before completing this sale."
+msgstr "Seleccione un tipo fiscal antes de completar esta venta."
+
+#. module: l10n_do_pos
+#: code:addons/l10n_do_pos/models/pos_order.py:0
+msgid "The fiscal sale could not be invoiced. Retry the same order."
+msgstr "No se pudo facturar la venta fiscal. Reintente la misma orden."
+
+#. module: l10n_do_pos
+#: code:addons/l10n_do_pos/models/pos_order.py:0
+msgid "Reload the POS. Fiscal numbers are assigned when the sale is saved."
+msgstr "Recargue el POS. Los comprobantes se asignan al guardar la venta."
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/overrides/payment_screen/payment_screen.js:0
+msgid "Fiscal checkout pending"
+msgstr "Facturación fiscal pendiente"
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/overrides/payment_screen/payment_screen.js:0
+msgid "Reconnect and retry this same order. Keep completed payments; no fiscal receipt is available until the sale is saved."
+msgstr "Restablezca la conexión y reintente esta misma orden. Conserve los pagos completados; el recibo fiscal estará disponible cuando se guarde la venta."

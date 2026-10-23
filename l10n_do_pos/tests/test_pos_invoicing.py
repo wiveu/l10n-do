@@ -2,6 +2,7 @@ from copy import deepcopy
 from datetime import timedelta
 import json
 from uuid import uuid4
+from unittest.mock import patch
 
 from odoo import fields
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -75,13 +76,13 @@ class TestFiscalPosInvoicing(AccountTestInvoicingCommon):
             'taxes_id': [(6, 0, cls.tax.ids)],
         })
 
-    def order_data(self, method=None, fiscal_type=None, sequence=None, **values):
+    def order_data(self, method=None, fiscal_type=None, sequence=None, reserve=True, **values):
         fiscal_type = fiscal_type or self.fiscal_type
         sequence = sequence or self.sequence
         operation = str(uuid4())
-        reservation = self.env['pos.order'].get_next_fiscal_sequence(
+        reservation = self.env['pos.order']._get_next_fiscal_sequence(
             fiscal_type.id, self.company.id, [],
-            json.dumps({'uuid': operation, 'session_id': self.session.id}))
+            json.dumps({'uuid': operation, 'session_id': self.session.id})) if reserve else {'ncf': False}
         return {
             'uuid': operation, 'name': 'Order ' + operation,
             'session_id': self.session.id, 'user_id': self.env.uid,
@@ -238,3 +239,93 @@ class TestFiscalPosInvoicing(AccountTestInvoicingCommon):
 
     def test_closed_session_credit_remains_unpaid(self):
         self.assert_closed_session_invoice(self.pay_later)
+
+    def test_checkout_allocates_number_only_with_posted_invoice(self):
+        data = self.order_data(reserve=False)
+        before = self.sequence.number_next_actual
+        order = self.sync([data])
+        self.assertEqual(order.state, 'invoiced')
+        self.assertEqual(order.ncf, 'B0200000080')
+        self.assertEqual(order.account_move.ref, order.ncf)
+        self.assertEqual(self.sequence.number_next_actual, before + 1)
+
+    def test_draft_interruption_consumes_no_number_and_can_resume(self):
+        data = self.order_data(reserve=False, state='draft')
+        before = self.sequence.number_next_actual
+        draft = self.sync([data])
+        self.assertFalse(draft.ncf)
+        self.assertFalse(draft.account_move)
+        self.assertEqual(self.sequence.number_next_actual, before)
+        data.update(state='paid', access_token=draft.access_token,
+                    lines=[(1, draft.lines.id, data['lines'][0][2])],
+                    payment_ids=[(1, draft.payment_ids.id, data['payment_ids'][0][2])])
+        recovered = self.sync([data])
+        self.assertEqual(recovered, draft)
+        self.assertEqual(recovered.state, 'invoiced')
+        self.assertEqual(recovered.ncf, 'B0200000080')
+        self.assertEqual(self.sequence.number_next_actual, before + 1)
+
+    def test_invoice_failure_rolls_back_number_order_and_payments_then_recovers(self):
+        data = self.order_data(self.cash, reserve=False)
+        before = self.sequence.number_next_actual
+        payments = self.env['account.payment'].search_count([])
+        logs = self.env['pos.order.ncf.log'].search_count([])
+        with self.assertRaisesRegex(ConnectionError, 'interrupted'), self.cr.savepoint():
+            with patch.object(type(self.env['pos.order']), '_generate_pos_order_invoice',
+                              side_effect=ConnectionError('interrupted')):
+                self.sync([data])
+        self.assertEqual(self.sequence.number_next_actual, before)
+        self.assertEqual(self.env['pos.order.ncf.log'].search_count([]), logs)
+        self.assertEqual(self.env['account.payment'].search_count([]), payments)
+        self.assertFalse(self.env['pos.order'].search([('uuid', '=', data['uuid'])]))
+        recovered = self.sync([data])
+        self.assertEqual(recovered.ncf, 'B0200000080')
+        self.assertEqual(recovered.state, 'invoiced')
+        self.assertEqual(self.env['account.payment'].search_count([]), payments + 1)
+
+    def test_failure_after_posting_rolls_back_entire_checkout(self):
+        data = self.order_data(self.cash, reserve=False)
+        payments = self.env['account.payment'].search_count([])
+        original = type(self.env['pos.order'])._generate_pos_order_invoice
+        def interrupted(order):
+            original(order)
+            self.assertEqual(order.account_move.state, 'posted')
+            self.assertEqual(self.env['account.payment'].search_count([]), payments + 1)
+            raise ConnectionError('after posting')
+        moves = self.env['account.move'].search_count([])
+        with self.assertRaisesRegex(ConnectionError, 'after posting'), self.cr.savepoint():
+            with patch.object(type(self.env['pos.order']), '_generate_pos_order_invoice', interrupted):
+                self.sync([data])
+        self.assertEqual(self.env['account.move'].search_count([]), moves)
+        self.assertEqual(self.env['account.payment'].search_count([]), payments)
+        self.assertEqual(self.sequence.number_next_actual, 80)
+        self.assertFalse(self.env['pos.order'].search([('uuid', '=', data['uuid'])]))
+        self.assertEqual(self.sync([data]).state, 'invoiced')
+
+    def test_lost_checkout_reply_recovers_same_number_without_collecting_twice(self):
+        data = self.order_data(self.cash, reserve=False)
+        first = self.sync([data])
+        self.assertEqual(first.state, 'invoiced')
+        invoice = first.account_move
+        counter = self.sequence.number_next_actual
+        payments = self.env['account.payment'].search_count([])
+        recovered = self.sync([data])
+        self.assertEqual(recovered, first)
+        self.assertEqual(recovered.account_move, invoice)
+        self.assertEqual(recovered.ncf, 'B0200000080')
+        self.assertEqual(self.sequence.number_next_actual, counter)
+        self.assertEqual(self.env['account.payment'].search_count([]), payments)
+        self.assertEqual(len(recovered.payment_ids), 1)
+
+    def test_legacy_browser_cannot_reserve_a_number_without_saving(self):
+        before = self.sequence.number_next_actual
+        with self.assertRaisesRegex(UserError, 'Reload'):
+            self.env['pos.order'].get_next_fiscal_sequence(self.fiscal_type.id, self.company.id, [],
+                json.dumps({'uuid': str(uuid4()), 'session_id': self.session.id}))
+        self.assertEqual(self.sequence.number_next_actual, before)
+
+    def test_missing_operation_identifier_does_not_consume_a_number(self):
+        data = self.order_data(reserve=False, uuid=False)
+        with self.assertRaisesRegex(UserError, 'identifier'), self.cr.savepoint():
+            self.sync([data])
+        self.assertEqual(self.sequence.number_next_actual, 80)

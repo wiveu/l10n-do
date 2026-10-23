@@ -176,19 +176,6 @@ patch(PaymentScreen.prototype, {
             return;
         }
 
-        // Generate NCF before completing the order
-        if (!order.ncf) {
-            try {
-                await this.getFiscalData();
-            } catch (error) {
-                this.dialog.add(AlertDialog, {
-                    title: _t("Error"),
-                    body: error.message || _t("Error generating NCF"),
-                });
-                return;
-            }
-        }
-
         return super.validateOrder(...arguments);
     },
 
@@ -258,23 +245,17 @@ patch(PaymentScreen.prototype, {
         return true;
     },
 
-    // Get fiscal data (NCF) from server
-    async getFiscalData() {
+    async afterOrderValidation() {
         const order = this.currentOrder;
-
-        const fiscalData = await this.orm.call(
-            "pos.order",
-            "get_next_fiscal_sequence",
-            [
-                false,
-                order.fiscal_type.id,
-                this.pos.company.id,
-                [],
-                JSON.stringify(order.serialize())
-            ]
-        );
-
-        order.set_l10n_do_fiscal_data(fiscalData);
+        if (this.pos.config.l10n_do_fiscal_journal &&
+            (!order.ncf || !order.raw.account_move || order.state !== "invoiced")) {
+            this.dialog.add(AlertDialog, {
+                title: _t("Fiscal checkout pending"),
+                body: _t("Reconnect and retry this same order. Keep completed payments; no fiscal receipt is available until the sale is saved."),
+            });
+            return;
+        }
+        return super.afterOrderValidation(...arguments);
     },
 
     // Override addNewPaymentLine for credit note handling

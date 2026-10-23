@@ -31,19 +31,13 @@ patch(PosStore.prototype, {
         );
     },
 
-    // Get fiscal data (NCF) from server
-    async get_fiscal_data(order) {
-        return this.data.call(
-            "pos.order",
-            "get_next_fiscal_sequence",
-            [
-                false,
-                order.fiscal_type.id,
-                this.company.id,
-                [],
-                JSON.stringify(order.serialize())
-            ]
-        );
+    postSyncAllOrders(orders) {
+        super.postSyncAllOrders(...arguments);
+        for (const order of orders) {
+            if (order.config.l10n_do_fiscal_journal) {
+                order.set_l10n_do_fiscal_data(order.raw);
+            }
+        }
     },
 
     // Get credit note by NCF
