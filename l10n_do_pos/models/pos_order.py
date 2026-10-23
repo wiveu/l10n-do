@@ -121,28 +121,16 @@ class PosOrder(models.Model):
 
     #     return super(PosOrder, self)._process_order(pos_order)
 
-    @api.model
-    def create_from_ui(self, orders, draft=False):
-        order_ids = super(PosOrder, self).create_from_ui(orders, draft)
-        
-        for order in self.sudo().browse([o['id'] for o in order_ids]):
-            
-            if order.config_id.invoice_journal_id.l10n_do_fiscal_journal \
-                    and order.state != 'invoiced' \
-                    and order.amount_total != 0 \
-                    and order.ncf:
-                
-                if not order.partner_id:
-                    if not order.config_id.pos_partner_id:
-                        raise UserError(_('This point of sale not have default customer, please set default customer in config POS'))
-                    
-                    order.write({
-                        'partner_id': order.config_id.pos_partner_id.id
-                    })
-
-                order._generate_pos_order_invoice()
-
-        return order_ids
+    def _process_saved_order(self, draft):
+        result = super()._process_saved_order(draft)
+        if (not draft and self.state == 'paid' and self.ncf and self.amount_total
+                and self.config_id.invoice_journal_id.l10n_do_fiscal_journal):
+            if not self.partner_id:
+                self.partner_id = self.config_id.pos_partner_id
+            if not self.partner_id:
+                raise UserError(_('This point of sale not have default customer, please set default customer in config POS'))
+            self._generate_pos_order_invoice()
+        return result
 
 
     def get_next_fiscal_sequence(

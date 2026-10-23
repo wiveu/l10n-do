@@ -26,7 +26,8 @@ class PosPayment(models.Model):
 
     def _create_payment_moves(self, is_reverse=False):
         
-        if self and not self.mapped('session_id.config_id')[0].l10n_do_fiscal_journal:
+        # Closed sessions need receivable reversals, not another cash/bank collection.
+        if is_reverse or (self and not self.mapped('session_id.config_id')[0].l10n_do_fiscal_journal):
             return super(PosPayment, self)._create_payment_moves(is_reverse)
 
         result = self.env['account.move']

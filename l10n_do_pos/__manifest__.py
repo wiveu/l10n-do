@@ -6,7 +6,7 @@
     'website': "https://github.com/Jenrax-git/l10n-do",
     'category': 'Localization',
     'countries': ['do'],
-    'version': '18.0.2.3.7',
+    'version': '18.0.2.3.8',
     'depends': [
         'base',
         'point_of_sale',
