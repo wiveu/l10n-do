@@ -13,6 +13,16 @@
 
     <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
 
+        <!-- These Odoo 18 layouts have no fiscal header extension. -->
+        <xpath expr="//div[@id='informations']" position="before">
+            <div t-if="o.is_l10n_do_fiscal_invoice and o.is_invoice() and o.fiscal_type_id.assigned_sequence
+                       and o.company_id.external_report_layout_id.key in
+                       ('web.external_layout_bubble', 'web.external_layout_wave', 'web.external_layout_folder')"
+                 class="row mb-3" name="l10n_do_fiscal_header">
+                <t t-call="l10n_do_ncf.fiscal_info"/>
+            </div>
+        </xpath>
+
         <xpath expr="//div[hasclass('row')][1]" position="attributes">
             <attribute name="t-if">not (o.is_l10n_do_fiscal_invoice and o.is_invoice() and o.fiscal_type_id and o.fiscal_type_id.assigned_sequence)</attribute>
         </xpath>

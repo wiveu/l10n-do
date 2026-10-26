@@ -10,7 +10,7 @@
     'website': "https://github.com/Jenrax-git/l10n-do",
     "category": "Localization",
     'countries': ['do'],
-    "version": "18.0.2.2.9",
+    "version": "18.0.2.2.10",
     # any module necessary for this one to work correctly
     "depends": [
         "base",

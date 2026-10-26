@@ -1,6 +1,6 @@
 from odoo import fields
-from .common import CommonSetup, environment
-from odoo.exceptions import ValidationError, MissingError
+from .common import CommonSetup
+from odoo.exceptions import ValidationError
 
 
 class AccountFiscalSequenceBaseTests(CommonSetup):
@@ -112,22 +112,14 @@ class AccountFiscalSequenceBaseTests(CommonSetup):
         with self.assertRaises(ValidationError):
             sequence_id._action_confirm()
 
-    def test_006_internal_sequence_delete(self):
-        """
-        Internal sequence must be deleted when fiscal sequence is deleted
-        """
-
-        sequence_id = self.fiscal_sequence_obj.browse(self.fiscal_seq_credito_fiscal)
-
-        # Cancel before delete
-        sequence_id._action_cancel()
-        # Check state
-        self.assertEqual(sequence_id.state, "cancelled")
-        self.assertEqual(sequence_id.sequence_id.active, False)
-
-        sequence_id.unlink()
-        with self.assertRaises(MissingError):
-            bool(sequence_id.sequence_id)
+    def test_006_cancel_preserves_legacy_internal_sequence(self):
+        legacy = self.env['ir.sequence'].create({'name': 'Legacy fiscal sequence'})
+        sequence = self.fiscal_sequence_obj.browse(self.fiscal_seq_credito_fiscal)
+        sequence.sequence_id = legacy
+        sequence._action_cancel()
+        self.assertEqual(sequence.state, 'cancelled')
+        self.assertFalse(legacy.active)
+        self.assertTrue(legacy.exists())
 
     def test_007_fiscal_sequence_auto_expire(self):
         """
@@ -149,142 +141,56 @@ class AccountFiscalSequenceBaseTests(CommonSetup):
         # Check state = 'expired'
         self.assertEqual(sequence_id.state, "expired")
 
-    def test_008_fiscal_sequence_sequence_vals(self):
-        """
-        Fiscal sequence's internal sequence must be created
-        with correct values
-        """
+    def test_008_fiscal_sequence_counter_initialized(self):
+        fiscal_type = self.fiscal_type_obj.browse(self.fiscal_type_unico).copy({
+            'name': 'Synthetic range type', 'prefix': 'B98',
+        })
+        sequence = self.fiscal_sequence_obj.create({
+            'name': 'Synthetic authorization', 'fiscal_type_id': fiscal_type.id,
+            'sequence_start': 1, 'sequence_end': 10,
+        })
+        sequence._action_confirm()
+        self.assertEqual(sequence.state, 'active')
+        self.assertEqual(sequence.number_next_actual, 1)
+        self.assertEqual(sequence.sequence_remaining, 10)
+        self.assertEqual(sequence.next_fiscal_number, 'B9800000001')
 
-        # Cancel and delete an existing one
-        sequence_id = self.fiscal_sequence_obj.browse(self.fiscal_seq_unico)
-        sequence_id._action_cancel()
-        sequence_id.unlink()
-
-        sequence_unico_id = self.fiscal_sequence_obj.create(
-            {
-                "name": "7045195031",
-                "fiscal_type_id": self.fiscal_type_unico,
-                "sequence_start": 1,
-                "sequence_end": 10,
-            }
-        )
-        sequence_unico_id._action_confirm()
-
-        # Check internal sequence vals
-        self.assertRecordValues(
-            sequence_unico_id.sequence_id,
-            [
-                {
-                    "implementation": "standard",
-                    "padding": self.fiscal_type_obj.browse(
-                        self.fiscal_type_unico
-                    ).padding,
-                    "number_increment": 1,
-                    "number_next_actual": 1,
-                }
-            ],
-        )
-
-    def test_009_fiscal_sequence_sequence_vals(self):
-        """
-        When a new Fiscal sequence is validated, a internal sequence
-        must be attached to it and its state 'active'
-        """
-
-        # Cancel and delete an existing one
-        sequence_id = self.fiscal_sequence_obj.browse(self.fiscal_seq_unico)
-        sequence_id._action_cancel()
-        sequence_id.unlink()
-
-        sequence_unico_id = self.fiscal_sequence_obj.create(
-            {
-                "name": "7045195031",
-                "fiscal_type_id": self.fiscal_type_unico,
-                "sequence_start": 1,
-                "sequence_end": 10,
-            }
-        )
-        sequence_unico_id._action_confirm()
-
-        assert sequence_unico_id.sequence_id
-        self.assertEqual(sequence_unico_id.state, "active")
+    def test_009_fiscal_sequence_counter_initialized(self):
+        fiscal_type = self.fiscal_type_obj.browse(self.fiscal_type_unico).copy({
+            'name': 'Synthetic range type', 'prefix': 'B98',
+        })
+        sequence = self.fiscal_sequence_obj.create({
+            'name': 'Synthetic authorization', 'fiscal_type_id': fiscal_type.id,
+            'sequence_start': 21, 'sequence_end': 30,
+        })
+        sequence._action_confirm()
+        self.assertEqual(sequence.state, 'active')
+        self.assertEqual(sequence.number_next_actual, 21)
+        self.assertEqual(sequence.sequence_remaining, 10)
+        self.assertEqual(sequence.next_fiscal_number, 'B9800000021')
 
 
 class AccountFiscalSequenceTransactionTests(CommonSetup):
     def test_010_sequence_transactions(self):
-        """
-        Check sequence remaining
-        Check sequence next fiscal number
-        Check sequence auto deplete
-        Check queued sequence gets auto activated
-        """
-
-        with environment() as env:
-
-            test_company = env["res.company"].search([("name", "=", "Test Company")])
-            if not test_company:
-                test_company = env["res.company"].create({"name": "Test Company"})
-
-            sequence_id = env["account.fiscal.sequence"].create(
-                {
-                    "name": "7045195031",
-                    "fiscal_type_id": self.fiscal_type_credito_fiscal,
-                    "sequence_start": 1,
-                    "sequence_end": 10,
-                    "company_id": test_company.id,
-                }
-            )
-            sequence_id._action_confirm()
-            self.assertEqual(sequence_id.sequence_remaining, 10)
-
-            queued_sequence_id = env["account.fiscal.sequence"].create(
-                {
-                    "name": "queued",
-                    "fiscal_type_id": self.fiscal_type_credito_fiscal,
-                    "sequence_start": 11,
-                    "sequence_end": 20,
-                    "company_id": test_company.id,
-                }
-            )
-            queued_sequence_id.action_queue()
-
-        for i in range(10):
-            with environment() as env:
-                env_sequence_id = env["account.fiscal.sequence"].search(
-                    [
-                        ("company_id", "=", test_company.id),
-                        ("fiscal_type_id", "=", self.fiscal_type_credito_fiscal),
-                        ("state", "=", "active"),
-                    ]
-                )
-                env_sequence_id.get_fiscal_number()
-                next_fiscal_number = "%s%s" % (
-                    env_sequence_id.fiscal_type_id.prefix,
-                    str(env_sequence_id.sequence_id.number_next_actual).zfill(
-                        env_sequence_id.fiscal_type_id.padding
-                    ),
-                )
-
-            # Check sequence_remaining
-            self.assertEqual(
-                env_sequence_id.sequence_remaining, env_sequence_id.sequence_end - i
-            )
-            # Check next_fiscal_number
-            self.assertEqual(env_sequence_id.next_fiscal_number, next_fiscal_number)
-        # Check state --> auto deplete
-        self.assertEqual(env_sequence_id.state, "depleted")
-
-        # Check queued sequence gets auto activated
-        with environment() as env:
-            queued_sequence_id = env["account.fiscal.sequence"].search(
-                [("company_id", "=", test_company.id), ("name", "=", "queued")]
-            )
-            self.assertEqual(queued_sequence_id.state, "active")
-
-        with environment() as env:
-            env["account.fiscal.sequence"].search(
-                [
-                    ("company_id", "=", test_company.id),
-                    ("fiscal_type_id", "=", self.fiscal_type_credito_fiscal),
-                ]
-            ).unlink()
+        company = self.env['res.company'].create({'name': 'Synthetic range company'})
+        self.env.user.company_ids |= company
+        ranges = self.fiscal_sequence_obj.with_company(company)
+        sequence = ranges.create({
+            'name': 'Synthetic authorization',
+            'fiscal_type_id': self.fiscal_type_credito_fiscal,
+            'sequence_start': 1, 'sequence_end': 10,
+        })
+        sequence._action_confirm()
+        queued = ranges.create({
+            'name': 'Synthetic queued authorization',
+            'fiscal_type_id': self.fiscal_type_credito_fiscal,
+            'sequence_start': 11, 'sequence_end': 20,
+        })
+        queued.action_queue()
+        for index in range(1, 11):
+            self.assertEqual(sequence.get_fiscal_number(), 'B01%08d' % index)
+            self.assertEqual(sequence.sequence_remaining, 10 - index)
+            self.assertEqual(sequence.next_fiscal_number, 'B01%08d' % (index + 1))
+        self.assertEqual(sequence.state, 'depleted')
+        self.assertEqual(queued.state, 'active')
+        self.assertEqual(queued.number_next_actual, 11)

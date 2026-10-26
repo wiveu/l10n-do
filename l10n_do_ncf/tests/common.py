@@ -1,27 +1,18 @@
-from contextlib import contextmanager
-
-import odoo
-from odoo.tests import common
-
+from odoo import fields
 from odoo.tests.common import TransactionCase
-
-ADMIN_USER_ID = common.ADMIN_USER_ID
-
-
-@contextmanager
-def environment():
-    """ Return an environment with a new cursor for the current database; the
-        cursor is committed and closed after the context block.
-    """
-    registry = odoo.registry(common.get_db_name())
-    with registry.cursor() as cr:
-        yield odoo.api.Environment(cr, ADMIN_USER_ID, {})
 
 
 class CommonSetup(TransactionCase):
     def setUp(self):
         super(CommonSetup, self).setUp()
 
+        # The legacy demo XML confirms a batch; prepare every range explicitly.
+        demo = self.env['ir.model.data'].search([
+            ('module', '=', 'l10n_do_ncf'), ('model', '=', 'account.fiscal.sequence'),
+        ])
+        for sequence in self.env['account.fiscal.sequence'].browse(demo.mapped('res_id')).filtered(
+                lambda record: record.state == 'draft'):
+            sequence._action_confirm()
         self.fiscal_sequence_obj = self.env["account.fiscal.sequence"]
         self.fiscal_type_obj = self.env["account.fiscal.type"]
         self.fiscal_seq_credito_fiscal = self.ref(
@@ -49,7 +40,7 @@ class AccountMoveCommon(CommonSetup):
         self.purchase_journal = False
 
         # Setup Fiscal Journals
-        for journal in self.journal_obj.search([("type", "in", ("sale", "purchase"))]):
+        for journal in self.journal_obj.search([("company_id", "=", self.env.company.id), ("type", "in", ("sale", "purchase"))]):
             journal.l10n_do_fiscal_journal = True
             if journal.type == "sale":
                 self.sale_journal = journal
@@ -87,20 +78,12 @@ class AccountMoveCommon(CommonSetup):
         )
 
         # Invoice lines
-        account_id = (
-            self.env["account.account"]
-            .search(
-                [
-                    (
-                        "user_type_id",
-                        "=",
-                        self.env.ref("account.data_account_type_revenue").id,
-                    )
-                ],
-                limit=1,
-            )
-            .id
-        )
+        account_id = self.env['account.account'].search([
+            ('account_type', '=', 'income'),
+            ('company_ids', 'in', self.env.company.id),
+        ], limit=1).id
+        self.assertTrue(account_id, 'The test company needs an income account')
+        self.invoice_obj = self.invoice_obj.with_context(default_move_type='out_invoice', default_invoice_date=fields.Date.today())
 
         self.invoice_line_data = [
             (
@@ -108,6 +91,7 @@ class AccountMoveCommon(CommonSetup):
                 0,
                 {
                     "product_id": self.env.ref("product.product_product_1").id,
+                    "tax_ids": [(5, 0, 0)],
                     "quantity": 40.0,
                     "account_id": account_id,
                     "name": "product test 1",
@@ -119,6 +103,7 @@ class AccountMoveCommon(CommonSetup):
                 0,
                 {
                     "product_id": self.env.ref("product.product_product_2").id,
+                    "tax_ids": [(5, 0, 0)],
                     "quantity": 21.0,
                     "account_id": account_id,
                     "name": "product test 2",
@@ -130,6 +115,7 @@ class AccountMoveCommon(CommonSetup):
                 0,
                 {
                     "product_id": self.env.ref("product.product_product_3").id,
+                    "tax_ids": [(5, 0, 0)],
                     "quantity": 21.0,
                     "account_id": account_id,
                     "name": "product test 3",
