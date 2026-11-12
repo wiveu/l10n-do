@@ -36,7 +36,6 @@ class AccountFiscalSequence(models.Model):
     )
     expiration_date = fields.Date(
         string="Expiration Date",
-        required=True,
         tracking=True,
         default=datetime.strptime(
             str(int(str(fields.Date.today())[0:4]) + 1) + "-12-31", "%Y-%m-%d"
@@ -47,6 +46,9 @@ class AccountFiscalSequence(models.Model):
         comodel_name="account.fiscal.type",
         required=True,
         tracking=True,
+    )
+    requires_expiration_date = fields.Boolean(
+        related="fiscal_type_id.requires_expiration_date",
     )
     type = fields.Selection(
         related="fiscal_type_id.type",
@@ -156,6 +158,8 @@ class AccountFiscalSequence(models.Model):
         Compute draft Fiscal Sequence default sequence_start
         """
         if self.fiscal_type_id and self.state == "draft":
+            if not self.requires_expiration_date:
+                self.expiration_date = False
             # Last active or depleted Fiscal Sequence
             fs_id = self.search(
                 [
@@ -255,7 +259,7 @@ class AccountFiscalSequence(models.Model):
             # Use DR local time
             l10n_do_date = get_l10n_do_datetime().date()
 
-            if l10n_do_date >= rec.expiration_date:
+            if rec.requires_expiration_date and l10n_do_date >= rec.expiration_date:
                 rec.state = "expired"
             else:
                 rec.write({
@@ -304,7 +308,7 @@ class AccountFiscalSequence(models.Model):
         fiscal_sequence_ids = self.search([("state", "=", "active")])
 
         for seq in fiscal_sequence_ids.filtered(
-            lambda s: l10n_do_date >= s.expiration_date
+            lambda s: s.requires_expiration_date and l10n_do_date >= s.expiration_date
         ):
             seq.state = "expired"
 
@@ -358,6 +362,12 @@ class AccountFiscalSequence(models.Model):
             if rec.sequence_id and rec.number_next_actual <=0:
                 rec.write({'number_next_actual': rec.sequence_id.number_next_actual})
 
+    @api.constrains('fiscal_type_id', 'expiration_date')
+    def _check_expiration_date(self):
+        for sequence in self:
+            if sequence.requires_expiration_date and not sequence.expiration_date:
+                raise ValidationError(_('This fiscal type requires an expiration date.'))
+
 class AccountFiscalType(models.Model):
     _name = "account.fiscal.type"
     _description = "Account Fiscal Type"
@@ -380,6 +390,7 @@ class AccountFiscalType(models.Model):
         string="Prefix",
         copy=False,
     )
+    requires_expiration_date = fields.Boolean(compute='_compute_requires_expiration_date')
     padding = fields.Integer(
         string="Padding",
         default=8,
@@ -432,6 +443,11 @@ class AccountFiscalType(models.Model):
             "There must be only one Fiscal Type of this Type and Prefix",
         )
     ]
+
+    @api.depends('prefix')
+    def _compute_requires_expiration_date(self):
+        for fiscal_type in self:
+            fiscal_type.requires_expiration_date = fiscal_type.prefix not in ('E32', 'E34')
 
     @api.depends("type")
     def _compute_journal_type(self):

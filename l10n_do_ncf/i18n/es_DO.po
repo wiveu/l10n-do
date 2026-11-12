@@ -1601,3 +1601,9 @@ msgstr ""
 #: code:addons/l10n_do_ncf/models/account_move.py:0
 msgid "vendor"
 msgstr "Proveedor"
+
+#. module: l10n_do_ncf
+#. odoo-python
+#: code:addons/l10n_do_ncf/models/account_fiscal_sequence.py:0
+msgid "This fiscal type requires an expiration date."
+msgstr "Este tipo de comprobante requiere una fecha de vencimiento."
