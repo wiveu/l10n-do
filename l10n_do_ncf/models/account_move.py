@@ -180,11 +180,8 @@ class AccountMove(models.Model):
                     ("fiscal_type_id", "=", fiscal_type.id),
                     ("state", "=", "active"),
                 ]
-                if inv.invoice_date:
-                    domain.append(("expiration_date", ">=", inv.invoice_date))
-                else:
-                    today = fields.Date.context_today(inv)
-                    domain.append(("expiration_date", ">=", today))
+                if fiscal_type.requires_expiration_date:
+                    domain.append(("expiration_date", ">=", inv.invoice_date or fields.Date.context_today(inv)))
 
                 fiscal_sequence_id = inv.env["account.fiscal.sequence"].search(
                     domain, order="expiration_date, id desc", limit=1,

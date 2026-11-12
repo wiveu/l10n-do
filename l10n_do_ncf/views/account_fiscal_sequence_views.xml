@@ -29,7 +29,8 @@
                             <field name="fiscal_type_id" widget="selection" domain="[('assigned_sequence', '=', True)]" />
                             <field name="sequence_start"/>
                             <field name="sequence_end"/>
-                            <field name="expiration_date"/>
+                            <field name="requires_expiration_date" invisible="True"/>
+                            <field name="expiration_date" required="requires_expiration_date" invisible="not requires_expiration_date"/>
                         </group>
                         <group>
                             <field name="warning_gap" invisible="True"/>
