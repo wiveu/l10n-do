@@ -1,6 +1,7 @@
 /** @odoo-module */
 
 import { _t } from "@web/core/l10n/translation";
+import { PartnerList } from "@point_of_sale/app/screens/partner_list/partner_list";
 import { PaymentScreen } from "@point_of_sale/app/screens/payment_screen/payment_screen";
 import { patch } from "@web/core/utils/patch";
 import { AlertDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
@@ -80,15 +81,19 @@ patch(PaymentScreen.prototype, {
             this.currentOrder.set_partner(existingPartner);
             this.currentOrder.set_fiscal_type(fiscalType);
         } else {
-            // Open partner list to create new partner
-            const { confirmed, payload: newPartner } = await this.pos.showTempScreen(
-                "PartnerListScreen",
-                { partner: null }
-            );
-            if (confirmed && newPartner) {
-                this.currentOrder.set_partner(newPartner);
-                this.currentOrder.set_fiscal_type(fiscalType);
+            const newPartner = await makeAwaitable(this.dialog, PartnerList, { partner: null });
+            if (!newPartner) {
+                return;
             }
+            if ((newPartner.vat || "").replace(/[-\s]/g, "") !== cleanRnc) {
+                this.dialog.add(AlertDialog, {
+                    title: _t("RNC or Cedula"),
+                    body: _t("Select a customer with the RNC or Cedula entered."),
+                });
+                return;
+            }
+            this.currentOrder.set_partner(newPartner);
+            this.currentOrder.set_fiscal_type(fiscalType);
         }
     },
 
