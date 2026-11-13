@@ -2,9 +2,12 @@
 
 import { PosOrder } from "@point_of_sale/app/models/pos_order";
 import { PosOrderline } from "@point_of_sale/app/models/pos_order_line";
+import { Orderline } from "@point_of_sale/app/generic_components/orderline/orderline";
 import { PosStore } from "@point_of_sale/app/store/pos_store";
 import { patch } from "@web/core/utils/patch";
 import { _t } from "@web/core/l10n/translation";
+
+Orderline.props.line.shape.l10n_do_itbis = { type: Number, optional: true };
 
 // Patch PosStore to load fiscal types
 patch(PosStore.prototype, {

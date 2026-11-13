@@ -182,3 +182,15 @@ The **Fiscal POS** module for Odoo 18 extends the Point of Sale functionality to
 - **Website**: https://github.com/Jenrax-git/l10n-do
 
 For technical support, customizations, or staff training, please contact the development team.
+
+### Orderline props regression
+
+Run against a built Odoo 18 POS JavaScript asset (no database or fiscal requests):
+
+```sh
+node l10n_do_pos/tests/check_orderline_props.mjs /path/to/point_of_sale.assets_prod.min.js
+```
+
+The check uses the asset's native OWL validator and Orderline schema with this
+module's display-data producer. It covers fiscal amounts, non-fiscal lines,
+and rejection of invalid types and unexpected fields.
