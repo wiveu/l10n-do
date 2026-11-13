@@ -959,3 +959,9 @@ msgstr "Facturación fiscal pendiente"
 #: code:addons/l10n_do_pos/static/src/overrides/payment_screen/payment_screen.js:0
 msgid "Reconnect and retry this same order. Keep completed payments; no fiscal receipt is available until the sale is saved."
 msgstr "Restablezca la conexión y reintente esta misma orden. Conserve los pagos completados; el recibo fiscal estará disponible cuando se guarde la venta."
+
+#. module: l10n_do_pos
+#. odoo-javascript
+#: code:addons/l10n_do_pos/static/src/overrides/payment_screen/payment_screen.js:0
+msgid "Select a customer with the RNC or Cedula entered."
+msgstr "Seleccione un cliente con el RNC o cédula introducido."
